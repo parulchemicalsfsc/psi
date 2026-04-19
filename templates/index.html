@@ -124,13 +124,12 @@
       <div class="client-grid-v2 reveal" style="margin-top:60px;">
         {% for client in clients %}
         <div class="client-card-v2">
-          <div class="client-logo-box">
-            <span>{{ client.short }}</span>
-          </div>
           <div class="client-info">
             <h4>{{ client.name }}</h4>
-            <p class="client-ind">{{ client.industry }}</p>
-            <p class="client-since">Partner Since {{ client.since }}</p>
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:8px;">
+              <p class="client-ind">{{ client.industry }}</p>
+              <p class="client-since">Since {{ client.since }}</p>
+            </div>
           </div>
         </div>
         {% endfor %}
