@@ -111,6 +111,33 @@
     </div>
   </section>
 
+  <!-- TRUSTED BY -->
+  <section style="background:#fff;padding:80px 0;">
+    <div class="container">
+      <div class="reveal text-center">
+        <div class="section-label">Our Partners</div>
+        <h2 class="section-title">Trusted By Industry Leaders</h2>
+        <div class="divider-center"><div class="divider-red"></div></div>
+        <p class="section-sub mt-16">Serving diverse industries with precision engineering and reliable manufacturing.</p>
+      </div>
+      
+      <div class="client-grid-v2 reveal" style="margin-top:60px;">
+        {% for client in clients %}
+        <div class="client-card-v2">
+          <div class="client-logo-box">
+            <span>{{ client.short }}</span>
+          </div>
+          <div class="client-info">
+            <h4>{{ client.name }}</h4>
+            <p class="client-ind">{{ client.industry }}</p>
+            <p class="client-since">Partner Since {{ client.since }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
   <!-- PRECISION WORKFLOW -->
   <section class="workflow-section">
     <div class="container">

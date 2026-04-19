@@ -15,17 +15,26 @@ def home(request):
     try:
         if os.path.exists(excel_path):
             df = pd.read_excel(excel_path)
-            # Assuming client names are in a column named 'client_name' or similar
-            # Based on previous check, it's the 3rd column (index 2)
-            # Let's try to find a column with 'client' in its name
-            client_col = next((col for col in df.columns if 'client' in col.lower()), df.columns[2])
-            clients = df[client_col].dropna().tolist()
+            # Find columns
+            client_col = next((col for col in df.columns if 'client' in col.lower()), df.columns[1])
+            since_col = next((col for col in df.columns if 'since' in col.lower()), df.columns[3])
+            ind_col = next((col for col in df.columns if 'ind' in col.lower()), df.columns[4])
+            
+            # Create list of dicts
+            for _, row in df.iterrows():
+                name = str(row[client_col])
+                clients.append({
+                    'name': name,
+                    'short': "".join([w[0] for w in name.split() if w[0].isupper()]) or name[:2].upper(),
+                    'industry': row[ind_col],
+                    'since': row[since_col]
+                })
     except Exception as e:
         print(f"Error reading excel: {e}")
         
     return render(request, 'index.html', {
         'posts': posts,
-        'clients': clients[:12] # Limit to 12 for the homepage
+        'clients': clients # Pass all clients
     })
 
 def about(request):
