@@ -1,0 +1,210 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Contact Us - Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <div class="contact-hero">
+    <div class="contact-hero-inner">
+      <div class="breadcrumb" style="color:rgba(255,255,255,.4);font-size:12px;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">Home <span style="color:var(--red);">/ Contact</span></div>
+      <h1 style="font-family:var(--font-display);font-weight:800;font-size:clamp(36px,5vw,64px);text-transform:uppercase;color:#fff;line-height:1;">Let's Build<br>Something Together</h1>
+    </div>
+    <!-- TABS for Contact / Schedule Meeting -->
+    <div style="max-width:1280px;margin:32px auto 0;padding:0 24px;display:flex;gap:0;border-bottom:2px solid rgba(255,255,255,.08);">
+      <button id="contact-tab" onclick="switchContactTab('contact')" style="padding:14px 28px;font-family:var(--font-display);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px;background:none;border:none;border-bottom:2px solid var(--red);margin-bottom:-2px;color:#fff;cursor:pointer;">Contact Us</button>
+      <button id="meeting-tab" onclick="switchContactTab('meeting')" style="padding:14px 28px;font-family:var(--font-display);font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.5px;background:none;border:none;border-bottom:2px solid transparent;margin-bottom:-2px;color:rgba(255,255,255,.4);cursor:pointer;">Schedule a Meeting</button>
+    </div>
+  </div>
+
+  <!-- CONTACT FORM -->
+  <div id="contact-section" style="background:var(--cream);">
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3>Get In Touch</h3>
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+          </div>
+          <div>
+            <h5>Address</h5>
+            <p>Plot No. 45, MIDC Industrial Area,<br>Andheri East, Mumbai – 400 093, India</p>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </div>
+          <div>
+            <h5>Phone</h5>
+            <a href="tel:+911234567890">+91 12345 67890</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </div>
+          <div>
+            <h5>Email</h5>
+            <a href="mailto:info@pressstampingindustries.com">info@pressstampingindustries.com</a>
+          </div>
+        </div>
+        <div class="contact-detail">
+          <div class="contact-icon">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>
+          </div>
+          <div>
+            <h5>Business Hours</h5>
+            <p>Mon–Sat: 9:00 AM – 6:30 PM IST</p>
+          </div>
+        </div>
+        <div style="margin-top:32px;padding-top:24px;border-top:1px solid rgba(255,255,255,.15);">
+          <div style="font-family:var(--font-display);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.6);margin-bottom:12px;">Follow Us</div>
+          <div style="display:flex;gap:8px;">
+            <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:14px;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.3)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">in</a>
+            <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:14px;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.3)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">tw</a>
+            <a href="#" style="width:36px;height:36px;background:rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;color:#fff;text-decoration:none;font-size:14px;transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,.3)'" onmouseout="this.style.background='rgba(255,255,255,.15)'">yt</a>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrap">
+        <h3>Send Us A Message</h3>
+        <form action="{% url 'contact' %}" method="POST" class="quote-form">
+          {% csrf_token %}
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" name="first_name" placeholder="First name" required></div>
+            <div class="form-group"><label>Last Name</label><input type="text" name="last_name" placeholder="Last name" required></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label>Email</label><input type="email" name="email" placeholder="your@company.com" required></div>
+            <div class="form-group"><label>Phone</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
+          </div>
+          <div class="form-group"><label>Company</label><input type="text" name="company" placeholder="Company name" required></div>
+          <div class="form-group"><label>Subject</label>
+            <select name="subject" required>
+              <option value="">Select inquiry type</option>
+              <option>General Inquiry</option>
+              <option>Request for Quote</option>
+              <option>Technical Support</option>
+              <option>Partnership / Supplier</option>
+              <option>Career Inquiry</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea name="message" rows="5" placeholder="Tell us about your project, part requirements, or any questions you have..." required></textarea></div>
+          <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCHEDULE MEETING -->
+  <div id="meeting-section" class="meeting-section" style="display:none;">
+    <div class="container">
+      <div class="section-label">Virtual Meeting</div>
+      <h2 class="section-title">Schedule A Meeting<br>With Our Team</h2>
+      <div class="divider-red"></div>
+      <p class="section-sub mt-16">Connect with our engineering and sales team for a project discussion, technical consultation, or facility overview.</p>
+
+      <div class="meeting-steps mt-32">
+        <div class="step-tabs">
+          <div class="step-tab active" id="stab1" onclick="goStep(1)">Step 1: Select Date & Time</div>
+          <div class="step-tab" id="stab2" onclick="goStep(2)">Step 2: Available Slots</div>
+          <div class="step-tab" id="stab3" onclick="goStep(3)">Step 3: Your Details</div>
+        </div>
+
+        <!-- STEP 1: Calendar -->
+        <div class="step-content active" id="step1">
+          <div class="calendar-wrap">
+            <div class="calendar-header">
+              <button class="cal-nav" onclick="changeMonth(-1)">‹</button>
+              <div class="cal-month" id="calMonth">April 2026</div>
+              <button class="cal-nav" onclick="changeMonth(1)">›</button>
+            </div>
+            <div class="calendar-grid" id="calGrid"></div>
+
+            <div class="timezone-select">
+              <label>Timezone:</label>
+              <select id="tzSelect" onchange="renderTimezone()">
+                <option value="IST">🇮🇳 IST (UTC+5:30)</option>
+                <option value="EST">🇺🇸 EST (UTC-5:00)</option>
+                <option value="GMT">🇬🇧 GMT (UTC+0:00)</option>
+                <option value="CET">🇪🇺 CET (UTC+1:00)</option>
+                <option value="SGT">🇸🇬 SGT (UTC+8:00)</option>
+              </select>
+            </div>
+
+            <div class="step-nav">
+              <button class="btn-primary" onclick="goStep(2)" id="step1Next" disabled style="opacity:.4;">Next: Select Time →</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- STEP 2: Time Slots -->
+        <div class="step-content" id="step2">
+          <div id="selectedDateDisplay" style="font-family:var(--font-display);font-weight:700;font-size:18px;text-transform:uppercase;color:var(--charcoal);margin-bottom:24px;"></div>
+          <h4 style="font-family:var(--font-display);font-weight:700;font-size:14px;text-transform:uppercase;color:var(--gray);margin-bottom:16px;letter-spacing:.5px;">Morning Slots — Available <span style="color:var(--red);">●</span> &nbsp; Unavailable <span style="color:var(--mid-gray);">●</span></h4>
+          <div class="slots-grid" id="slotsGrid"></div>
+          <div class="step-nav">
+            <button class="btn-secondary" onclick="goStep(1)" style="color:var(--charcoal);border-color:var(--mid-gray);">← Back</button>
+            <button class="btn-primary" onclick="goStep(3)" id="step2Next" disabled style="opacity:.4;">Next: Your Details →</button>
+          </div>
+        </div>
+
+        <!-- STEP 3: Personal Details -->
+        <div class="step-content" id="step3">
+          <div class="meeting-summary" id="meetingSummary"></div>
+          <form id="meetingFormElement" action="{% url 'book_meeting' %}" method="POST" class="meeting-form">
+            {% csrf_token %}
+            <input type="hidden" name="date" id="hiddenDate">
+            <input type="hidden" name="time" id="hiddenTime">
+            <input type="hidden" name="timezone" id="hiddenTimezone">
+            
+            <div class="form-row">
+              <div class="form-group"><label>Full Name *</label><input type="text" name="full_name" id="meetName" placeholder="Your name" oninput="checkMeetingForm()" required></div>
+              <div class="form-group"><label>Company *</label><input type="text" name="company" id="meetCompany" placeholder="Company name" oninput="checkMeetingForm()" required></div>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Email Address *</label><input type="email" name="email" id="meetEmail" placeholder="your@company.com" oninput="checkMeetingForm()" required></div>
+              <div class="form-group"><label>Phone Number</label><input type="tel" name="phone" id="meetPhone" placeholder="+91 XXXXX XXXXX"></div>
+            </div>
+            <div class="form-group"><label>Meeting Purpose *</label>
+              <select name="purpose" id="meetPurpose" onchange="checkMeetingForm()" required>
+                <option value="">Select a topic</option>
+                <option>Technical Consultation</option>
+                <option>Request for Quote Discussion</option>
+                <option>Facility Overview</option>
+                <option>Supplier / Partnership</option>
+                <option>Quality / Audit Discussion</option>
+              </select>
+            </div>
+            <div class="form-group"><label>Additional Notes</label><textarea name="notes" rows="3" placeholder="Any specific agenda items or technical questions you'd like to discuss..."></textarea></div>
+            <div class="step-nav">
+              <button type="button" class="btn-secondary" onclick="goStep(2)" style="color:var(--charcoal);border-color:var(--mid-gray);">← Back</button>
+              <button type="button" class="btn-primary" id="confirmBtn" onclick="submitMeetingForm()" disabled style="opacity:.4;">Confirm Meeting ✓</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    // Handle tab switching from URL parameter
+    document.addEventListener('DOMContentLoaded', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('tab') === 'meeting') {
+            switchContactTab('meeting');
+        }
+    });
+
+    function submitMeetingForm() {
+        if (selectedDate && selectedSlot) {
+            document.getElementById('hiddenDate').value = `${selectedDate.y}-${selectedDate.m + 1}-${selectedDate.d}`;
+            document.getElementById('hiddenTime').value = selectedSlot;
+            document.getElementById('hiddenTimezone').value = document.getElementById('tzSelect').value;
+            document.getElementById('meetingFormElement').submit();
+        }
+    }
+</script>
+{% endblock %}

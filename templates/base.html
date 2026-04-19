@@ -1,0 +1,156 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Press Stamping Industries – Precision Metal Stamping{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}Press Stamping Industries – Precision metal stamping manufacturer serving automotive, aerospace, electronics and more. ISO certified, 30+ years of excellence.{% endblock %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+
+<!-- TOP BAR -->
+<div class="topbar">
+  <div class="topbar-inner">
+    <div style="display:flex;gap:20px;flex-wrap:wrap;">
+      <a href="mailto:[EMAIL_ADDRESS]">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+        [EMAIL_ADDRESS]
+      </a>
+      <a href="tel:+911234567890">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        +91 12345 67890
+      </a>
+    </div>
+    <div class="topbar-right">
+      <a href="{% url 'contact' %}?tab=meeting" class="btn-meeting">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right:4px"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg>
+        Schedule Meeting
+      </a>
+      <a href="{% url 'quote' %}" class="btn-quote">Get a Quote</a>
+    </div>
+  </div>
+</div>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="{% url 'home' %}" class="nav-logo">
+      <img src="{{ MEDIA_URL }}psi-logo.png" alt="Press Stamping Industries" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--charcoal);\'>PRESS<span style=\'color:var(--red)\'> STAMPING</span></span>'">
+    </a>
+    <ul class="nav-links">
+      <li><a href="{% url 'home' %}">Home</a></li>
+      <li><a href="{% url 'about' %}">About</a></li>
+      <li>
+        <a href="{% url 'capabilities' %}">Capabilities
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="{% url 'capabilities' %}">Metal Stamping</a>
+          <a href="{% url 'capabilities' %}">Deep Drawing</a>
+          <a href="{% url 'capabilities' %}">CNC Machining</a>
+          <a href="{% url 'capabilities' %}">Tool & Die Making</a>
+        </div>
+      </li>
+      <li>
+        <a href="{% url 'industries' %}">Industries
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
+        </a>
+        <div class="dropdown">
+          <a href="{% url 'industries' %}">Automotive</a>
+          <a href="{% url 'industries' %}">Railway</a>
+          <a href="{% url 'industries' %}">Power & Energy</a>
+          <a href="{% url 'industries' %}">Chemical</a>
+          <a href="{% url 'industries' %}">Packaging & Bottling</a>
+          <a href="{% url 'industries' %}">Industrial Machinery</a>
+        </div>
+      </li>
+      <li><a href="{% url 'blog' %}">Blog</a></li>
+      <li><a href="{% url 'gallery' %}">Gallery</a></li>
+      <li><a href="{% url 'careers' %}">Careers</a></li>
+    </ul>
+    <a href="{% url 'contact' %}" class="nav-cta">Contact Us</a>
+    <div class="hamburger" onclick="toggleMobileMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMobileMenu()">×</button>
+  <nav class="mobile-nav">
+    <a href="{% url 'home' %}">Home</a>
+    <a href="{% url 'about' %}">About</a>
+    <a href="{% url 'capabilities' %}" class="sub">Capabilities</a>
+    <a href="{% url 'industries' %}" class="sub">Industries</a>
+    <a href="{% url 'blog' %}" class="sub">Blog</a>
+    <a href="{% url 'gallery' %}" class="sub">Gallery</a>
+    <a href="{% url 'careers' %}" class="sub">Careers</a>
+    <a href="{% url 'contact' %}">Contact Us</a>
+    <a href="{% url 'quote' %}" style="color:var(--red);">Get a Quote →</a>
+  </nav>
+</div>
+
+<main>
+    {% block content %}{% endblock %}
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-logo">
+          <img src="{{ MEDIA_URL }}psi-logo.png" alt="Press Stamping Industries" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:var(--font-display);font-weight:700;font-size:18px;color:#fff;\'>PRESS STAMPING<br>INDUSTRIES</span>'">
+        </div>
+        <p class="footer-desc">Precision metal stamping manufacturer serving 12+ industries since 1985. ISO 9001:2015 · ISO 45001:2018 certified.</p>
+        <div class="footer-social">
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">tw</a>
+          <a href="#" class="social-link">yt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <a href="{% url 'capabilities' %}">Progressive Die Stamping</a>
+        <a href="{% url 'capabilities' %}">Deep Draw Stamping</a>
+        <a href="{% url 'capabilities' %}">Fine Blanking</a>
+        <a href="{% url 'capabilities' %}">Tool & Die Design</a>
+        <a href="{% url 'capabilities' %}">Secondary Operations</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="{% url 'about' %}">About Us</a>
+        <a href="{% url 'industries' %}">Industries Served</a>
+        <a href="{% url 'blog' %}">Blog & Insights</a>
+        <a href="{% url 'gallery' %}">Photo Gallery</a>
+        <a href="{% url 'careers' %}">Careers</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <a href="tel:+911234567890">+91 12345 67890</a>
+        <a href="mailto:info@pressstampingindustries.com">[EMAIL_ADDRESS]</a>
+        <a href="#">336/29, Press Stamping Industries, GIDC,<br>Industrial Estate Makarpura, Vadodara, Gujarat,390010</a>
+        <a href="{% url 'quote' %}" style="color:var(--red);margin-top:8px;font-weight:600;">Get a Quote →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Press Stamping Industries. All rights reserved. · <a href="#">pressstampingindustries.com</a></p>
+      <div style="display:flex;gap:16px;">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Sitemap</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="{% static 'js/script.js' %}"></script>
+{% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Blog & Insights - Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb">Home <span>/ Blog</span></div>
+      <h1>Insights &<br>Case Studies</h1>
+    </div>
+  </div>
+  <section>
+    <div class="container">
+      <div class="section-label">Our Knowledge</div>
+      <h2 class="section-title">Latest From PSI</h2>
+      <div class="divider-red"></div>
+      
+      <div class="blog-grid mt-32">
+        {% for post in posts %}
+        <div class="blog-card">
+          <div class="blog-img">
+            {% if post.image %}
+              <img src="{{ post.image.url }}" alt="{{ post.title }}" style="width:100%;height:100%;object-fit:cover;">
+            {% else %}
+              <div style="font-family:var(--font-display);font-weight:800;font-size:32px;color:rgba(255,255,255,.1);">PSI NEWS</div>
+            {% endif %}
+            <div class="blog-img-accent">{{ post.category }}</div>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">{{ post.created_at|date:"F d, Y" }} · BY {{ post.author }}</div>
+            <h3>{{ post.title }}</h3>
+            <p>{{ post.content|truncatewords:20 }}</p>
+            <a href="#" class="blog-readmore">Read Full Case Study →</a>
+          </div>
+        </div>
+        {% empty %}
+        <div class="text-center" style="grid-column: 1 / -1; padding: 40px; background: var(--cream);">
+            <p>No blog posts available yet. Check back soon!</p>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+{% endblock %}

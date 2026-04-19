@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Careers - Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <div class="page-header">
+    <div class="container">
+      <div class="breadcrumb">Home <span>/ Careers</span></div>
+      <h1>Join Our<br>Expert Team</h1>
+    </div>
+  </div>
+  <section>
+    <div class="container">
+      <div class="careers-layout">
+        <div>
+          <div class="section-label">Open Positions</div>
+          <h2 class="section-title">Current Opportunities</h2>
+          <div class="divider-red"></div>
+          <p style="margin:20px 0;font-size:15px;color:var(--gray);line-height:1.7;">Work at the leading edge of precision manufacturing. We offer competitive salaries, health benefits, and a culture of continuous learning.</p>
+          
+          <div class="job-list mt-32">
+            <div class="job-card" onclick="document.getElementById('job-selector').value='Senior Tool Designer'">
+              <div class="job-info">
+                <h4>Senior Tool Designer</h4>
+                <p>Experience: 8+ Years · Mumbai (MIDC)</p>
+                <div class="job-tags">
+                  <span class="job-tag full">Full Time</span>
+                  <span class="job-tag">CAD/CAM</span>
+                  <span class="job-tag">SolidWorks</span>
+                </div>
+              </div>
+              <div class="apply-btn">Apply Now</div>
+            </div>
+            <div class="job-card" onclick="document.getElementById('job-selector').value='Quality Assurance Engineer'">
+              <div class="job-info">
+                <h4>Quality Assurance Engineer</h4>
+                <p>Experience: 5+ Years · Mumbai (MIDC)</p>
+                <div class="job-tags">
+                  <span class="job-tag full">Full Time</span>
+                  <span class="job-tag">ISO 9001</span>
+                  <span class="job-tag">IATF 16949</span>
+                </div>
+              </div>
+              <div class="apply-btn">Apply Now</div>
+            </div>
+            <div class="job-card" onclick="document.getElementById('job-selector').value='CNC Operator'">
+              <div class="job-info">
+                <h4>CNC Operator (VMC/EDM)</h4>
+                <p>Experience: 3+ Years · Mumbai (MIDC)</p>
+                <div class="job-tags">
+                  <span class="job-tag full">Full Time</span>
+                  <span class="job-tag">Technical</span>
+                </div>
+              </div>
+              <div class="apply-btn">Apply Now</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="careers-form">
+          <h3>Apply For A Position</h3>
+          <form action="{% url 'careers' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+              <label>Full Name *</label>
+              <input type="text" name="full_name" placeholder="First and last name" required>
+            </div>
+            <div class="form-row">
+              <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="your@email.com" required></div>
+              <div class="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
+            </div>
+            <div class="form-group">
+              <label>Position Applying For *</label>
+              <select name="position" id="job-selector" required>
+                <option value="">Select a position</option>
+                <option>Senior Tool Designer</option>
+                <option>Quality Assurance Engineer</option>
+                <option>CNC Operator</option>
+                <option>Production Supervisor</option>
+                <option>HR & Admin</option>
+                <option>Internship (Engineering)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Upload Resume (PDF) *</label>
+              <input type="file" name="resume" accept=".pdf" required>
+            </div>
+            <div class="form-group">
+              <label>Cover Letter / Notes</label>
+              <textarea name="message" rows="4" placeholder="Tell us about your experience and why you'd be a great fit..."></textarea>
+            </div>
+            <button type="submit" class="btn-primary" style="width:100%;">Submit Application</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

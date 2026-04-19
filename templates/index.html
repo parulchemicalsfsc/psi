@@ -1,0 +1,267 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-pattern"></div>
+    <div class="hero-accent"></div>
+    <div class="hero-content">
+      <div class="hero-label">Est. 1985 · ISO 9001:2015 & ISO 45001:2018 Certified</div>
+      <h1 class="hero-title">Precision Engineering,<br><span>Industrial Excellence</span></h1>
+      <p class="hero-subtitle">Leading manufacturer of high-quality press stamping components, serving diverse industries with over 40 years of expertise.</p>
+      <div class="hero-actions">
+        <a href="{% url 'capabilities' %}" class="btn-primary">Explore Capabilities</a>
+        <a href="{% url 'quote' %}" class="btn-secondary">Request a Quote</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">40<span>+</span></div><div class="label">Years of Excellence</div></div>
+        <div class="hero-stat"><div class="num">150<span>+</span></div><div class="label">Active Clients</div></div>
+        <div class="hero-stat"><div class="num">99.8<span>%</span></div><div class="label">Quality Pass Rate</div></div>
+        <div class="hero-stat"><div class="num">12</div><div class="label">Industries Served</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CORE SERVICES -->
+  <section style="background:#fff;padding:60px 0;">
+    <div class="container">
+      <div class="reveal text-center">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Core Services</h2>
+        <div class="divider-center"><div class="divider-red"></div></div>
+        <p class="section-sub mt-16">Comprehensive press stamping solutions tailored to your industry requirements.</p>
+      </div>
+      <div class="services-grid reveal">
+        <div class="service-card">
+          <div class="service-img"><img src="../media/metal-stamping.jpg" alt="Metal Stamping"></div>
+          <div class="service-content">
+            <h3>Metal Stamping</h3>
+            <p>High-precision metal stamping services for complex components. Capabilities include punching, blanking, and forming with tight tolerances.</p>
+            <div class="service-specs">
+              <span class="spec-tag">Tight Tolerances</span>
+              <span class="spec-tag">All Metals</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-img"><img src="../media/die-stamping.jpg" alt="Progressive Die Stamping"></div>
+          <div class="service-content">
+            <h3>Progressive Die Stamping</h3>
+            <p>Efficient multi-station stamping for high-volume production. Single-pass processing for complex parts reduces cost and lead time.</p>
+            <div class="service-specs">
+              <span class="spec-tag">High Volume</span>
+              <span class="spec-tag">Cost Efficient</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-img"><img src="../media/deep-drawing.jpg" alt="Deep Drawing"></div>
+          <div class="service-content">
+            <h3>Deep Drawing</h3>
+            <p>Specialized deep drawing processes for hollow and cylindrical parts. Advanced tooling ensures uniform wall thickness and structural integrity.</p>
+            <div class="service-specs">
+              <span class="spec-tag">Seamless</span>
+              <span class="spec-tag">Cylindrical</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="service-img"><img src="../media/tool-making.jpg" alt="Tool & Die Making"></div>
+          <div class="service-content">
+            <h3>Tool & Die Making</h3>
+            <p>Custom tool and die design and manufacturing for your specific requirements. In-house engineering ensures perfect fit and long life.</p>
+            <div class="service-specs">
+              <span class="spec-tag">In-House</span>
+              <span class="spec-tag">Custom Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE ARE -->
+  <section style="background:var(--cream);padding:80px 0;">
+    <div class="container">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;">
+        <div class="reveal text-center">
+          <div class="section-label">Who We Are</div>
+          <h2 class="section-title">A Legacy Of Precision</h2>
+          <div class="divider-center"><div class="divider-red"></div></div>
+          <p style="color:var(--gray);font-size:16px;line-height:1.7;margin-top:20px;">Established in 1985, Press Stamping has grown from a small workshop into one of India's leading press stamping manufacturers. Our commitment to quality, precision, and customer satisfaction has made us the preferred partner for industry leaders across automotive, railways, chemical, and power sectors.</p>
+          <p style="color:var(--gray);font-size:16px;line-height:1.7;margin-top:12px;">With state-of-the-art machinery, ISO-certified processes, and a team of skilled engineers, we deliver components that meet the most stringent quality standards.</p>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-top:32px;">
+            <div style="display:flex;gap:12px;align-items:center;color:var(--charcoal);font-size:14px;font-weight:600;">
+              <span style="color:var(--red);">✔</span> ISO 9001:2015 & ISO 45001:2018 Certified
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;color:var(--charcoal);font-size:14px;font-weight:600;">
+              <span style="color:var(--red);">✔</span> Advanced CNC & Precision Equipment
+            </div>
+            <div style="display:flex;gap:12px;align-items:center;color:var(--charcoal);font-size:14px;font-weight:600;">
+              <span style="color:var(--red);">✔</span> On-Time Delivery & Quality Assurance
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <img src="../media/who-we-are.png" alt="Who We Are" style="width:100%;border-radius:4px;box-shadow:0 10px 30px rgba(0,0,0,.05);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRECISION WORKFLOW -->
+  <section class="workflow-section">
+    <div class="container">
+      <div class="reveal text-center">
+        <div class="section-label">Our Process</div>
+        <h2 class="section-title">Precision Workflow</h2>
+        <div class="divider-center"><div class="divider-red"></div></div>
+        <p class="section-sub mt-16">A systematic approach to engineering excellence, from initial concept to high-volume delivery.</p>
+      </div>
+      
+      <div class="workflow-grid reveal">
+        <div class="workflow-item">
+          <span class="workflow-step">01</span>
+          <h3>Design & Engineering</h3>
+          <p>Collaborative engineering using advanced CAD/CAM integration to optimize part design for manufacturability (DFM).</p>
+        </div>
+        <div class="workflow-item">
+          <span class="workflow-step">02</span>
+          <h3>Precision Tooling</h3>
+          <p>In-house tool and die development ensuring absolute control over component geometry and production longevity.</p>
+        </div>
+        <div class="workflow-item">
+          <span class="workflow-step">03</span>
+          <h3>Volume Production</h3>
+          <p>High-speed automated press lines delivering consistent results across massive production runs with minimal downtime.</p>
+        </div>
+        <div class="workflow-item">
+          <span class="workflow-step">04</span>
+          <h3>Quality Control</h3>
+          <p>Rigorous 100% inspection protocols and full material traceability meeting the strictest global industry standards.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <!-- INDUSTRIES SERVED (home) -->
+  <section style="padding:60px 0;background:var(--light-gray);">
+    <div class="container">
+      <div class="reveal text-center">
+        <div class="section-label">Industries Served</div>
+        <h2 class="section-title">Built For Every<br>Demanding Sector</h2>
+        <div class="divider-center"><div class="divider-red"></div></div>
+      </div>
+      <div class="industries-grid reveal" style="margin-top:48px;">
+        <div class="industry-card ind-auto" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+          <span>Automotive</span>
+        </div>
+        <div class="industry-card ind-rail" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-4 0-8 .5-8 4v9.5C4 17.43 5.57 19 7.5 19L6 20.5v.5h12v-.5L16.5 19c1.93 0 3.5-1.57 3.5-3.5V6c0-3.5-4-4-8-4zM7.5 17c-.83 0-1.5-.67-1.5-1.5S6.67 14 7.5 14s1.5.67 1.5 1.5S8.33 17 7.5 17zm3.5-6H6V6h5v5zm7 6c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm0-6h-5V6h5v5z"/></svg>
+          <span>Railway</span>
+        </div>
+        <div class="industry-card ind-energy" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+          <span>Power & Energy</span>
+        </div>
+        <div class="industry-card ind-chem" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.8 18.4l-5.3-7.9V4.5c.3-.2.5-.5.5-.9 0-.6-.4-1-1-1H9c-.6 0-1 .4-1 1 0 .4.2.7.5.9V10.5L3.2 18.4C2.7 19.1 3.2 20 4 20h16c.8 0 1.3-.9.8-1.6zM9.5 5.5h5v4.5l-1 1.5h-3l-1-1.5V5.5z"/></svg>
+          <span>Chemical</span>
+        </div>
+        <div class="industry-card ind-pack" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 18V6h11v12H4zm13 0V6h3v12h-3zM6 9h7v2H6V9zm0 4h7v2H6v-2z"/></svg>
+          <span>Packaging & Bottling</span>
+        </div>
+        <div class="industry-card ind-mach" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 21H2V3l7 4V3l7 4V3l6 4v14zm-12-2h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm-12-4h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm-8-4h2V9h-2v2zm4 0h2V9h-2v2zm4 0h2V9h-2v2z"/></svg>
+          <span>Industrial Machinery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="testimonials">
+    <div class="container">
+      <div class="reveal text-center">
+        <div class="section-label">Client Testimonials</div>
+        <h2 class="section-title">What Our Clients Say</h2>
+        <div class="divider-center"><div class="divider-red"></div></div>
+      </div>
+      <div class="testimonials-grid reveal">
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>PSI delivered 50,000 precision brackets for our automotive assembly line with zero defects and two days ahead of schedule. Their DFM process saved us significant tooling cost.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">RK</div>
+            <div>
+              <div class="author-name">Rajesh Kumar</div>
+              <div class="author-company">VP Engineering, AutoTech Solutions</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>We've worked with Press Stamping Industries for 8 years. The consistency of quality, documentation, and responsive engineering team makes them our first-choice supplier.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">SM</div>
+            <div>
+              <div class="author-name">Sarah Mitchell</div>
+              <div class="author-company">Procurement Director, AeroComp India</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars">★★★★★</div>
+          <p>From rapid prototype to full production run in under 6 weeks. PSI's tool shop and engineering team turned around a complex deep-draw component that three other vendors refused.</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AP</div>
+            <div>
+              <div class="author-name">Arjun Patel</div>
+              <div class="author-company">CTO, MediForm Devices</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTIFICATIONS (home preview) -->
+  <section style="background:var(--light-gray);padding:60px 0;">
+    <div class="container">
+      <div class="reveal text-center">
+        <div class="section-label">Quality Assurance</div>
+        <h2 class="section-title">Quality Certifications</h2>
+        <div class="divider-center"><div class="divider-red"></div></div>
+        <p class="section-sub" style="margin:16px auto 0;text-align:center;">Every process, every part — governed by internationally recognized quality frameworks.</p>
+      </div>
+      <div class="cert-grid reveal">
+        <div class="cert-card iso-2015">
+          <div class="cert-content">
+            <div class="cert-badge">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            </div>
+            <h4>ISO 9001:2015</h4>
+            <p>Quality Management System — Surveillance Audit 2024</p>
+            <a href="{{ MEDIA_URL }}ISO - 9001 2015.pdf" target="_blank" class="view-cert">View Certificate →</a>
+          </div>
+        </div>
+        <div class="cert-card iso-2018">
+          <div class="cert-content">
+            <div class="cert-badge">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 10c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <h4>ISO 45001:2018</h4>
+            <p>Occupational Health & Safety — Active Certification</p>
+            <a href="{{ MEDIA_URL }}PRESS STAMPING  ISO 45001.pdf" target="_blank" class="view-cert">View Certificate →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}
