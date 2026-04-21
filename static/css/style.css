@@ -65,7 +65,7 @@ body{font-family:var(--font-body);background:var(--cream);color:var(--charcoal);
 
 /* ── HERO ── */
 .hero{position:relative;min-height:45vh;background:var(--white);overflow:hidden;display:flex;align-items:center;border-bottom:1px solid var(--light-gray);}
-.hero-bg{position:absolute;inset:0;background-image:url('/media/hero-industrial.png');background-size:cover;background-position:center;animation:heroZoom 20s infinite alternate;opacity:0.6;}
+.hero-bg{position:absolute;inset:0;background-image:url('../images/hero-industrial.png');background-size:cover;background-position:center;animation:heroZoom 20s infinite alternate;opacity:0.6;}
 @keyframes heroZoom {
   from {transform:scale(1);}
   to {transform:scale(1.1);}
@@ -195,12 +195,12 @@ section{padding:80px 0;}
 }
 
 /* Industry Specific Backgrounds */
-.ind-auto { background-image: url('/media/ind-automotive.png'); }
-.ind-rail { background-image: url('/media/ind-railway.png'); }
-.ind-energy { background-image: url('/media/ind-energy.png'); }
-.ind-chem { background-image: url('/media/ind-chemical.png'); }
-.ind-pack { background-image: url('/media/ind-packaging.png'); }
-.ind-mach { background-image: url('/media/ind-machinery.png'); }
+.ind-auto { background-image: url('../images/ind-automotive.png'); }
+.ind-rail { background-image: url('../images/ind-railway.png'); }
+.ind-energy { background-image: url('../images/ind-energy.png'); }
+.ind-chem { background-image: url('../images/ind-chemical.png'); }
+.ind-pack { background-image: url('../images/ind-packaging.png'); }
+.ind-mach { background-image: url('../images/ind-machinery.png'); }
 
 /* ── STATS BANNER ── */
 .stats-banner{background:var(--red);padding:56px 0;}

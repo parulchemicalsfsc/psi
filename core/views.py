@@ -11,7 +11,7 @@ def home(request):
     
     # Read clients from Excel
     clients = []
-    excel_path = os.path.join(settings.MEDIA_ROOT, 'updated client list.xlsx')
+    excel_path = getattr(settings, 'EXCEL_PATH', os.path.join(settings.BASE_DIR, 'static', 'images', 'updated client list.xlsx'))
     try:
         if os.path.exists(excel_path):
             df = pd.read_excel(excel_path)

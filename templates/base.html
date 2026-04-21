@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'images/psi-logo.png' %}">
     {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -40,7 +41,7 @@
 <nav class="navbar">
   <div class="nav-inner">
     <a href="{% url 'home' %}" class="nav-logo">
-      <img src="{{ MEDIA_URL }}psi-logo.png" alt="Press Stamping Industries" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--charcoal);\'>PRESS<span style=\'color:var(--red)\'> STAMPING</span></span>'">
+      <img src="{% static 'images/psi-logo.png' %}" alt="Press Stamping Industries" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--charcoal);\'>PRESS<span style=\'color:var(--red)\'> STAMPING</span></span>'">
     </a>
     <ul class="nav-links">
       <li><a href="{% url 'home' %}">Home</a></li>
@@ -106,7 +107,7 @@
     <div class="footer-grid">
       <div>
         <div class="footer-logo">
-          <img src="{{ MEDIA_URL }}psi-logo.png" alt="Press Stamping Industries" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:var(--font-display);font-weight:700;font-size:18px;color:#fff;\'>PRESS STAMPING<br>INDUSTRIES</span>'">
+          <img src="{% static 'images/psi-logo.png' %}" alt="Press Stamping Industries" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:var(--font-display);font-weight:700;font-size:18px;color:#fff;\'>PRESS STAMPING<br>INDUSTRIES</span>'">
         </div>
         <p class="footer-desc">Precision metal stamping manufacturer serving 12+ industries since 1985. ISO 9001:2015 · ISO 45001:2018 certified.</p>
         <div class="footer-social">

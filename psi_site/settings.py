@@ -132,13 +132,14 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Use WhiteNoise's compressed storage only in production
 if not DEBUG:
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    WHITENOISE_USE_FINDERS = True
 
 # AWS S3 Configuration for Media Files
 USE_AWS = env.bool('USE_AWS', default=False)
@@ -158,5 +159,7 @@ if USE_AWS:
 else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
+    # For Excel reading in core/views.py
+    EXCEL_PATH = BASE_DIR / 'static' / 'images' / 'updated client list.xlsx'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
