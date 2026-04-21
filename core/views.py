@@ -87,17 +87,21 @@ def contact(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
         
-        ContactSubmission.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            phone=phone,
-            company=company,
-            subject=subject,
-            message=message
-        )
-        messages.success(request, "Thank you! Your message has been sent. We will get back to you soon.")
-        return redirect('contact')
+        try:
+            ContactSubmission.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                phone=phone,
+                company=company,
+                subject=subject,
+                message=message
+            )
+            messages.success(request, "Thank you! Your message has been sent. We will get back to you soon.")
+            return redirect('contact')
+        except Exception as e:
+            from django.http import HttpResponse
+            return HttpResponse(f"Error: {str(e)}", status=500)
         
     return render(request, 'contact.html')
 

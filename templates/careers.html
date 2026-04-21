@@ -63,15 +63,15 @@
           <form action="{% url 'careers' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-              <label>Full Name *</label>
+              <label class="form-group-name">Full Name *</label>
               <input type="text" name="full_name" placeholder="First and last name" required>
             </div>
             <div class="form-row">
-              <div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="your@email.com" required></div>
-              <div class="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
+              <div class="form-group"><label class="form-group-name">Email *</label><input type="email" name="email" placeholder="your@email.com" required></div>
+              <div class="form-group"><label class="form-group-name">Phone *</label><input type="tel" name="phone" placeholder="+91 XXXXX XXXXX" required></div>
             </div>
             <div class="form-group">
-              <label>Position Applying For *</label>
+              <label class="form-group-name">Position Applying For *</label>
               <select name="position" id="job-selector" required>
                 <option value="">Select a position</option>
                 <option>Senior Tool Designer</option>
@@ -83,11 +83,11 @@
               </select>
             </div>
             <div class="form-group">
-              <label>Upload Resume (PDF) *</label>
+              <label class="form-group-name">Upload Resume (PDF) *</label>
               <input type="file" name="resume" accept=".pdf" required>
             </div>
             <div class="form-group">
-              <label>Cover Letter / Notes</label>
+              <label class="form-group-name">Cover Letter / Notes</label>
               <textarea name="message" rows="4" placeholder="Tell us about your experience and why you'd be a great fit..."></textarea>
             </div>
             <button type="submit" class="btn-primary" style="width:100%;">Submit Application</button>
