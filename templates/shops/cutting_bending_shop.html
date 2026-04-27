@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Cutting & Bending Shop – Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <!-- HERO -->
+  <div class="hero-sub" style="background-image: url('{% static 'images/hero-industrial.png' %}');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="reveal">
+        <h1 class="hero-title" style="font-size: clamp(32px, 5vw, 64px);">Cutting & <span>Bending</span></h1>
+        <p class="hero-subtitle">High-precision shearing and CNC bending facilities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT TABLE -->
+  <section style="background:#fff;">
+    <div class="container">
+      <div class="shop-section reveal">
+        <h3 class="shop-title">Cutting & Bending Inventory</h3>
+        <div class="table-wrapper">
+          <table class="equipment-table">
+            <thead><tr><th>Sr.</th><th>Machine</th><th>Capacity</th><th>Qty</th><th>Make</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Shearing Machine</td><td>200 Tons</td><td>1</td><td>Jekson Machinery</td></tr>
+              <tr><td>2</td><td>Shearing Machine</td><td>120 Tons</td><td>1</td><td>Chamunda Eng Works</td></tr>
+              <tr><td>3</td><td>Press Brake</td><td>160 Tons</td><td>1</td><td>Jekson Machinery</td></tr>
+              <tr><td>4</td><td>CNC Press Brake</td><td>160 Tons</td><td>1</td><td>AccuPress</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div class="container">
+      <h2>Precision Metal Bending</h2>
+      <p>High-accuracy bending for complex profiles and heavy-duty plates.</p>
+      <a href="{% url 'quote' %}" class="btn-white">Request a Quote</a>
+    </div>
+  </div>
+{% endblock %}

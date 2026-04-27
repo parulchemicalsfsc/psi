@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Fabrication Shop – Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <!-- HERO -->
+  <div class="hero-sub" style="background-image: url('{% static 'images/hero-industrial.png' %}');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="reveal">
+        <h1 class="hero-title" style="font-size: clamp(32px, 5vw, 64px);">Fabrication <span>Shop</span></h1>
+        <p class="hero-subtitle">Advanced welding and structural fabrication facilities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT TABLE -->
+  <section style="background:#fff;">
+    <div class="container">
+      <div class="shop-section reveal">
+        <h3 class="shop-title">Fabrication Shop Inventory</h3>
+        <div class="table-wrapper">
+          <table class="equipment-table">
+            <thead><tr><th>Sr.</th><th>Machine</th><th>Capacity</th><th>Qty</th><th>Make</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Arc Welding Machine</td><td>400 AMP</td><td>8</td><td>BURMAN</td></tr>
+              <tr><td>2</td><td>Arc Welding Machine</td><td>400 AMP</td><td>2</td><td>Amada</td></tr>
+              <tr><td>3</td><td>Arc Welding Machine</td><td>400 AMP</td><td>1</td><td>Vishwakarma</td></tr>
+              <tr><td>4</td><td>Mig Welding Machine</td><td>-</td><td>1</td><td>SEW</td></tr>
+              <tr><td>5</td><td>Mig Welding Machine</td><td>-</td><td>1</td><td>Vishwakarma</td></tr>
+              <tr><td>6</td><td>Mig Welding Machine</td><td>-</td><td>1</td><td>Vishwakarma</td></tr>
+              <tr><td>7</td><td>Argon Welding Machine</td><td>75 Tons</td><td>2</td><td>Self Made</td></tr>
+              <tr><td>8</td><td>Spot Welding</td><td>63 Tons</td><td>4</td><td>SEW</td></tr>
+              <tr><td>9</td><td>Roller</td><td>50 Tons</td><td>1</td><td>Self Made</td></tr>
+              <tr><td>10</td><td>Over Head Crane</td><td>35 Tons</td><td>1</td><td>Self Made</td></tr>
+              <tr><td>11</td><td>Over Head Crane</td><td>30 Tons</td><td>1</td><td>Sailesh Machine Tools</td></tr>
+              <tr><td>12</td><td>Magnetic Drilling Machine</td><td>20 Tons</td><td>1</td><td>Ambica</td></tr>
+              <tr><td>13</td><td>Magnetic Drilling Machine</td><td>20 Tons</td><td>1</td><td>Ambica</td></tr>
+              <tr><td>14</td><td>Table Tapping Machine</td><td>10 Tons</td><td>1</td><td>Rajkot Machine Tools</td></tr>
+              <tr><td>15</td><td>Bench Grinder</td><td>60 Tons</td><td>1</td><td>Self Made</td></tr>
+              <tr><td>16</td><td>Belt Grinder</td><td>75 Kgs</td><td>1</td><td>Self Made</td></tr>
+              <tr><td>17</td><td>4" Hand Grinder</td><td>75 Kgs</td><td>1</td><td>Vijimesh</td></tr>
+              <tr><td>18</td><td>7" Hand Grinder</td><td>5 Tons</td><td>1</td><td>Sahjanand</td></tr>
+              <tr><td>19</td><td>Pneumatic Tools Grinders</td><td>1 Tons</td><td>2</td><td>Nilkamal</td></tr>
+              <tr><td>20</td><td>Screw Compressor with Drier</td><td>5 HP</td><td>1</td><td>Atlas Copco</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div class="container">
+      <h2>Custom Fabrication Services</h2>
+      <p>From simple brackets to complex structural assemblies.</p>
+      <a href="{% url 'quote' %}" class="btn-white">Request a Quote</a>
+    </div>
+  </div>
+{% endblock %}

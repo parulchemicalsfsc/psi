@@ -198,16 +198,5 @@
             switchContactTab('meeting');
         }
     });
-
-    function submitMeetingForm() {
-        if (selectedDate && selectedSlot) {
-            const m = String(selectedDate.m + 1).padStart(2, '0');
-            const d = String(selectedDate.d).padStart(2, '0');
-            document.getElementById('hiddenDate').value = `${selectedDate.y}-${m}-${d}`;
-            document.getElementById('hiddenTime').value = selectedSlot;
-            document.getElementById('hiddenTimezone').value = document.getElementById('tzSelect').value;
-            document.getElementById('meetingFormElement').submit();
-        }
-    }
 </script>
 {% endblock %}

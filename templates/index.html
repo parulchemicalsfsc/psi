@@ -4,7 +4,10 @@
 {% block content %}
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg"></div>
+    <video autoplay muted loop playsinline class="hero-video">
+      <source src="{% static 'images/hero.bg.mp4' %}" type="video/mp4">
+    </video>
+    <div class="hero-overlay"></div>
     <div class="hero-pattern"></div>
     <div class="hero-accent"></div>
     <div class="hero-content">
@@ -34,47 +37,80 @@
         <p class="section-sub mt-16">Comprehensive press stamping solutions tailored to your industry requirements.</p>
       </div>
       <div class="services-grid reveal">
-        <div class="service-card">
-          <div class="service-img"><img src="{% static 'images/metal-stamping.jpg' %}" alt="Metal Stamping"></div>
+        <div class="service-card" onclick="window.location.href='{% url 'press_shop' %}'" style="cursor:pointer;">
+          <div class="service-img"><img src="{% static 'images/press-shop.png' %}" alt="Press Shop"></div>
           <div class="service-content">
-            <h3>Metal Stamping</h3>
-            <p>High-precision metal stamping services for complex components. Capabilities include punching, blanking, and forming with tight tolerances.</p>
+            <h3>Press Shop</h3>
+            <p>High-capacity power and hydraulic press facilities for precision stamping. Max capacity up to 300 Tons.</p>
             <div class="service-specs">
-              <span class="spec-tag">Tight Tolerances</span>
-              <span class="spec-tag">All Metals</span>
+              <span class="spec-tag">300T Capacity</span>
+              <span class="spec-tag">19 Units</span>
             </div>
           </div>
         </div>
-        <div class="service-card">
-          <div class="service-img"><img src="{% static 'images/die-stamping.jpg' %}" alt="Progressive Die Stamping"></div>
+        <div class="service-card" onclick="window.location.href='{% url 'tool_shop' %}'" style="cursor:pointer;">
+          <div class="service-img"><img src="{% static 'images/tool-shop.png' %}" alt="Tool Shop"></div>
           <div class="service-content">
-            <h3>Progressive Die Stamping</h3>
-            <p>Efficient multi-station stamping for high-volume production. Single-pass processing for complex parts reduces cost and lead time.</p>
+            <h3>Tool Shop</h3>
+            <p>In-house tool design, development and maintenance for high-precision dies and industrial fixtures.</p>
             <div class="service-specs">
-              <span class="spec-tag">High Volume</span>
-              <span class="spec-tag">Cost Efficient</span>
+              <span class="spec-tag">In-House Tool Room</span>
+              <span class="spec-tag">7 Units</span>
             </div>
           </div>
         </div>
-        <div class="service-card">
-          <div class="service-img"><img src="{% static 'images/deep-drawing.jpg' %}" alt="Deep Drawing"></div>
+        <div class="service-card" onclick="window.location.href='{% url 'fabrication_shop' %}'" style="cursor:pointer;">
+          <div class="service-img"><img src="{% static 'images/fabrication-shop.png' %}" alt="Fabrication Shop"></div>
           <div class="service-content">
-            <h3>Deep Drawing</h3>
-            <p>Specialized deep drawing processes for hollow and cylindrical parts. Advanced tooling ensures uniform wall thickness and structural integrity.</p>
+            <h3>Fabrication Shop</h3>
+            <p>Comprehensive fabrication services including MIG, TIG, and ARC welding for structural assemblies.</p>
             <div class="service-specs">
-              <span class="spec-tag">Seamless</span>
-              <span class="spec-tag">Cylindrical</span>
+              <span class="spec-tag">Welding</span>
+              <span class="spec-tag">20 Units</span>
             </div>
           </div>
         </div>
-        <div class="service-card">
-          <div class="service-img"><img src="{% static 'images/tool-making.jpg' %}" alt="Tool & Die Making"></div>
+        <div class="service-card" onclick="window.location.href='{% url 'cutting_bending_shop' %}'" style="cursor:pointer;">
+          <div class="service-img"><img src="{% static 'images/cutting-bending.png' %}" alt="Cutting & Bending"></div>
           <div class="service-content">
-            <h3>Tool & Die Making</h3>
-            <p>Custom tool and die design and manufacturing for your specific requirements. In-house engineering ensures perfect fit and long life.</p>
+            <h3>Cutting & Bending</h3>
+            <p>Heavy-duty shearing and CNC bending for precision plate processing and structural components.</p>
             <div class="service-specs">
-              <span class="spec-tag">In-House</span>
-              <span class="spec-tag">Custom Design</span>
+              <span class="spec-tag">CNC Bending</span>
+              <span class="spec-tag">4 Units</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card" onclick="window.location.href='{% url 'cnc_shop' %}'" style="cursor:pointer;">
+          <div class="service-img"><img src="{% static 'images/cnc-shop.png' %}" alt="CNC Shop"></div>
+          <div class="service-content">
+            <h3>CNC Shop</h3>
+            <p>Advanced CNC laser and plasma cutting centers for high-precision plate work and complex geometries.</p>
+            <div class="service-specs">
+              <span class="spec-tag">Laser Cutting</span>
+              <span class="spec-tag">5 Units</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card" onclick="window.location.href='{% url 'paint_shop' %}'" style="cursor:pointer;">
+          <div class="service-img"><img src="{% static 'images/paint-shop.png' %}" alt="Paint Shop"></div>
+          <div class="service-content">
+            <h3>Paint Shop</h3>
+            <p>Industrial powder coating and finishing services providing durable and high-quality protective coatings.</p>
+            <div class="service-specs">
+              <span class="spec-tag">Powder Coating</span>
+              <span class="spec-tag">Industrial Grade</span>
+            </div>
+          </div>
+        </div>
+        <div class="service-card" onclick="window.location.href='{% url 'measuring' %}'" style="cursor:pointer;">
+          <div class="service-img"><img src="{% static 'images/measuring.png' %}" alt="Measuring & QC"></div>
+          <div class="service-content">
+            <h3>Measuring</h3>
+            <p>Precision inspection instruments and ISO-certified protocols ensuring zero-defect production quality.</p>
+            <div class="service-specs">
+              <span class="spec-tag">ISO Certified</span>
+              <span class="spec-tag">18 Units</span>
             </div>
           </div>
         </div>
@@ -111,8 +147,8 @@
     </div>
   </section>
 
-  <!-- TRUSTED BY -->
-  <section style="background:#fff;padding:80px 0;">
+  <!-- OUR PARTNERS -->
+  <section style="background:#fff; padding:80px 0; border-top:1px solid var(--light-gray);">
     <div class="container">
       <div class="reveal text-center">
         <div class="section-label">Our Partners</div>
@@ -120,10 +156,13 @@
         <div class="divider-center"><div class="divider-red"></div></div>
         <p class="section-sub mt-16">Serving diverse industries with precision engineering and reliable manufacturing.</p>
       </div>
-      
+
       <div class="client-grid-v2 reveal" style="margin-top:60px;">
         {% for client in clients %}
         <div class="client-card-v2">
+          <div class="client-card-logo">
+            <img src="{% static client.logo %}" alt="{{ client.name }}" onerror="this.style.display='none'">
+          </div>
           <div class="client-info">
             <h4>{{ client.name }}</h4>
             <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:8px;">
@@ -201,11 +240,39 @@
         </div>
         <div class="industry-card ind-pack" onclick="window.location.href='{% url 'industries' %}'">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 18V6h11v12H4zm13 0V6h3v12h-3zM6 9h7v2H6V9zm0 4h7v2H6v-2z"/></svg>
-          <span>Packaging & Bottling</span>
+          <span>Packaging</span>
         </div>
         <div class="industry-card ind-mach" onclick="window.location.href='{% url 'industries' %}'">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M22 21H2V3l7 4V3l7 4V3l6 4v14zm-12-2h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm-12-4h2v-2h-2v2zm4 0h2v-2h-2v2zm4 0h2v-2h-2v2zm-8-4h2V9h-2v2zm4 0h2V9h-2v2zm4 0h2V9h-2v2z"/></svg>
           <span>Industrial Machinery</span>
+        </div>
+        <div class="industry-card ind-farming" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 10V8h-4V4h-2v4h-4V4H8v4H4v2h16zM4 12v8h16v-8H4zm2 2h4v4H6v-4zm6 0h6v4h-6v-4z"/></svg>
+          <span>Farming Systems</span>
+        </div>
+        <div class="industry-card ind-renewable" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L8 14v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+          <span>Wind & Solar</span>
+        </div>
+        <div class="industry-card ind-electrical" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+          <span>Transformer Parts</span>
+        </div>
+        <div class="industry-card ind-heat" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M15 13V5c0-1.66-1.34-3-3-3S9 3.34 9 5v8c-1.21.91-2 2.37-2 4 0 2.76 2.24 5 5 5s5-2.24 5-5c0-1.63-.79-3.09-2-4zm-3-9c.55 0 1 .45 1 1v3h-2V5c0-.55.45-1 1-1z"/></svg>
+          <span>Heat Exchanger</span>
+        </div>
+        <div class="industry-card ind-tyre" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-12.5c-2.48 0-4.5 2.02-4.5 4.5s2.02 4.5 4.5 4.5 4.5-2.02 4.5-4.5-2.02-4.5-4.5-4.5z"/></svg>
+          <span>Tyre Industries</span>
+        </div>
+        <div class="industry-card ind-damper" onclick="window.location.href='{% url 'industries' %}'">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2c-5.52 0-10 4.48-10 10s4.48 10 10 10 10-4.48 10-10-4.48-10-10-10zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v10h-2V7z"/></svg>
+          <span>Damper Systems</span>
+        </div>
+        <div class="industry-card more-industries" onclick="window.location.href='{% url 'industries' %}'" style="background: var(--red); display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: none;">
+          <span style="color: #fff; font-weight: 800; font-size: 14px; text-transform: uppercase; letter-spacing: 1.5px; line-height: 1.2;">& Many<br>More</span>
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width: 24px; height: 24px; margin-top: 12px; fill: #fff;"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
         </div>
       </div>
     </div>

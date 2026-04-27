@@ -11,7 +11,7 @@ def home(request):
     
     # Read clients from Excel
     clients = []
-    excel_path = getattr(settings, 'EXCEL_PATH', os.path.join(settings.BASE_DIR, 'static', 'images', 'updated client list.xlsx'))
+    excel_path = os.path.join(settings.BASE_DIR, 'updated-client-list.xlsx')
     try:
         if os.path.exists(excel_path):
             df = pd.read_excel(excel_path)
@@ -19,15 +19,22 @@ def home(request):
             client_col = next((col for col in df.columns if 'client' in col.lower()), df.columns[1])
             since_col = next((col for col in df.columns if 'since' in col.lower()), df.columns[3])
             ind_col = next((col for col in df.columns if 'ind' in col.lower()), df.columns[4])
+            website_col = next((col for col in df.columns if 'website' in col.lower()), None)
             
             # Create list of dicts
             for _, row in df.iterrows():
-                name = str(row[client_col])
+                name = str(row[client_col]).strip()
+                if 'no client' in name.lower() or not name.strip() or name.lower() == 'nan':
+                    continue
+                    
+                logo_filename = name.lower().replace(' ', '_').replace('.', '').replace('/', '_') + '.png'
                 clients.append({
                     'name': name,
                     'short': "".join([w[0] for w in name.split() if w[0].isupper()]) or name[:2].upper(),
                     'industry': row[ind_col],
-                    'since': row[since_col]
+                    'since': row[since_col],
+                    'website': row[website_col] if website_col else '#',
+                    'logo': f'images/logos/{logo_filename}'
                 })
     except Exception as e:
         print(f"Error reading excel: {e}")
@@ -153,3 +160,24 @@ def book_meeting(request):
         messages.success(request, f"Meeting confirmed for {date_str} at {time_str} ({timezone}). Check your email for details.")
         return redirect('contact')
     return redirect('contact')
+
+def press_shop(request):
+    return render(request, 'shops/press_shop.html')
+
+def tool_shop(request):
+    return render(request, 'shops/tool_shop.html')
+
+def fabrication_shop(request):
+    return render(request, 'shops/fabrication_shop.html')
+
+def cutting_bending_shop(request):
+    return render(request, 'shops/cutting_bending_shop.html')
+
+def cnc_shop(request):
+    return render(request, 'shops/cnc_shop.html')
+
+def paint_shop(request):
+    return render(request, 'shops/paint_shop.html')
+
+def measuring(request):
+    return render(request, 'shops/measuring.html')

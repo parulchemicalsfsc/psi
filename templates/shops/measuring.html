@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Measuring & Inspection – Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <!-- HERO -->
+  <div class="hero-sub" style="background-image: url('{% static 'images/hero-industrial.png' %}');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="reveal">
+        <h1 class="hero-title" style="font-size: clamp(32px, 5vw, 64px);">Measuring & <span>Inspection</span></h1>
+        <p class="hero-subtitle">High-precision quality control and dimensional verification.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT TABLE -->
+  <section style="background:#fff;">
+    <div class="container">
+      <div class="shop-section reveal">
+        <h3 class="shop-title">Measuring & Inspection Inventory</h3>
+        <div class="table-wrapper">
+          <table class="equipment-table">
+            <thead><tr><th>Sr.</th><th>Machine</th><th>Capacity</th><th>Qty</th><th>Make</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Digital Vernier Height Gauge</td><td>600mm</td><td>1</td><td>INSIZE</td></tr>
+              <tr><td>2</td><td>Vernier Height Gauge</td><td>300mm</td><td>1</td><td>Mitutoyo</td></tr>
+              <tr><td>3</td><td>Vernier Caliper</td><td>1000mm</td><td>1</td><td>Mitutoyo</td></tr>
+              <tr><td>4</td><td>Vernier Caliper</td><td>300mm</td><td>3</td><td>Mitutoyo</td></tr>
+              <tr><td>5</td><td>Vernier Caliper</td><td>200mm</td><td>7</td><td>Mitutoyo</td></tr>
+              <tr><td>6</td><td>Dial Vernier Caliper</td><td>200mm</td><td>3</td><td>Mitutoyo</td></tr>
+              <tr><td>7</td><td>Digital Vernier Caliper</td><td>200mm</td><td>2</td><td>Mitutoyo</td></tr>
+              <tr><td>8</td><td>Micrometer</td><td>0-25mm</td><td>4</td><td>Mitutoyo</td></tr>
+              <tr><td>9</td><td>Micrometer</td><td>25-50mm</td><td>1</td><td>Mitutoyo</td></tr>
+              <tr><td>10</td><td>Micrometer</td><td>50-75mm</td><td>1</td><td>Mitutoyo</td></tr>
+              <tr><td>11</td><td>Combination Set</td><td>-</td><td>1</td><td>Mitutoyo</td></tr>
+              <tr><td>12</td><td>Surface Plate</td><td>600 x 600</td><td>1</td><td>-</td></tr>
+              <tr><td>13</td><td>Angle Plate</td><td>250 x 250</td><td>1</td><td>-</td></tr>
+              <tr><td>14</td><td>Magnetic V Block</td><td>4 Inch</td><td>2 Sets</td><td>-</td></tr>
+              <tr><td>15</td><td>Plug Gauge</td><td>M5</td><td>1</td><td>-</td></tr>
+              <tr><td>16</td><td>Plug Gauge</td><td>M6</td><td>1</td><td>-</td></tr>
+              <tr><td>17</td><td>Plug Gauge</td><td>M10</td><td>1</td><td>-</td></tr>
+              <tr><td>18</td><td>Radius Gauge</td><td>R 0.5mm to R 8mm</td><td>1 Set</td><td>-</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div class="container">
+      <h2>Quality Guaranteed</h2>
+      <p>100% inspection for every critical dimension ensuring zero-defect delivery.</p>
+      <a href="{% url 'contact' %}" class="btn-white">Contact Quality Team</a>
+    </div>
+  </div>
+{% endblock %}

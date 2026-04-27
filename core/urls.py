@@ -12,4 +12,11 @@ urlpatterns = [
     path('contact/', views.contact, name='contact'),
     path('quote/', views.quote, name='quote'),
     path('book-meeting/', views.book_meeting, name='book_meeting'),
+    path('capabilities/press-shop/', views.press_shop, name='press_shop'),
+    path('capabilities/tool-shop/', views.tool_shop, name='tool_shop'),
+    path('capabilities/fabrication-shop/', views.fabrication_shop, name='fabrication_shop'),
+    path('capabilities/cutting-bending-shop/', views.cutting_bending_shop, name='cutting_bending_shop'),
+    path('capabilities/cnc-shop/', views.cnc_shop, name='cnc_shop'),
+    path('capabilities/paint-shop/', views.paint_shop, name='paint_shop'),
+    path('capabilities/measuring-inspection/', views.measuring, name='measuring'),
 ]

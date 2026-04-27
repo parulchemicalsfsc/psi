@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CNC Shop – Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <!-- HERO -->
+  <div class="hero-sub" style="background-image: url('{% static 'images/hero-industrial.png' %}');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="reveal">
+        <h1 class="hero-title" style="font-size: clamp(32px, 5vw, 64px);">CNC <span>Shop</span></h1>
+        <p class="hero-subtitle">State-of-the-art Plasma and Laser cutting centers.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT TABLE -->
+  <section style="background:#fff;">
+    <div class="container">
+      <div class="shop-section reveal">
+        <h3 class="shop-title">CNC Shop Inventory</h3>
+        <div class="table-wrapper">
+          <table class="equipment-table">
+            <thead><tr><th>Sr.</th><th>Machine</th><th>Capacity</th><th>Qty</th><th>Make</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Plasma Cutting</td><td>2600mm x 10000mm Bed Size</td><td>1</td><td>Messer Plasma Source - Kjelberg Hf1 30neo</td></tr>
+              <tr><td>2</td><td>Reciprocating Compressor</td><td>5 HP</td><td>1</td><td>Elgi</td></tr>
+              <tr><td>3</td><td>Air Drier</td><td>-</td><td>1</td><td>PuriFlair</td></tr>
+              <tr><td>4</td><td>Laser Cutting</td><td>1500 x 10000mm Bed Size</td><td>1</td><td>Amada 2.5 KW</td></tr>
+              <tr><td>5</td><td>Vertical Machining Center</td><td>1000 x 720 x 500</td><td>1</td><td>Planning: Cosmos Or APC</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div class="container">
+      <h2>Advanced CNC Machining</h2>
+      <p>High-precision laser and plasma cutting for intricate designs and heavy plates.</p>
+      <a href="{% url 'quote' %}" class="btn-white">Request a Quote</a>
+    </div>
+  </div>
+{% endblock %}

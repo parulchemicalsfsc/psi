@@ -157,17 +157,102 @@ function checkMeetingForm(){
     btn.style.opacity=ok?'1':'.4';
   }
 }
-function confirmMeeting(){
-  // This will be handled by Django form submission eventually
-  // But for the UI logic, we can keep the alert or submit the form
-  const form = document.getElementById('meetingFormElement');
-  if (form) {
-    form.submit();
-  } else {
-    const name=document.getElementById('meetName').value;
-    const d=selectedDate;
-    alert(`Meeting confirmed!\n\n${monthNames[d.m]} ${d.d}, ${d.y} at ${selectedSlot}\n\nWe've sent a calendar invite to your email, ${name}. Our team will join via Google Meet / Zoom. See you then!`);
-  }
+// ── FORM SUBMISSIONS (EMAILJS) ──
+// NOTE: You must update these IDs with your actual EmailJS credentials
+const EMAILJS_CONFIG = {
+    serviceID: 'service_psi', 
+    publicKey: 'YOUR_PUBLIC_KEY',
+    templates: {
+        contact: 'template_contact',
+        meeting: 'template_meeting',
+        quote: 'template_quote',
+        careers: 'template_careers'
+    }
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize EmailJS if public key is provided in config
+    if (typeof emailjs !== 'undefined' && EMAILJS_CONFIG.publicKey !== 'YOUR_PUBLIC_KEY') {
+        emailjs.init(EMAILJS_CONFIG.publicKey);
+    }
+
+    // Handle all quote/contact/careers forms
+    const forms = document.querySelectorAll('.quote-form');
+    forms.forEach(form => {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Determine template based on page or hidden fields
+            let templateID = EMAILJS_CONFIG.templates.contact;
+            const path = window.location.pathname;
+            
+            if (path.includes('quote')) {
+                templateID = EMAILJS_CONFIG.templates.quote;
+            } else if (path.includes('careers')) {
+                templateID = EMAILJS_CONFIG.templates.careers;
+            }
+
+            const btn = form.querySelector('button[type="submit"]');
+            const originalText = btn.textContent;
+            btn.textContent = 'Sending...';
+            btn.disabled = true;
+
+            emailjs.sendForm(EMAILJS_CONFIG.serviceID, templateID, this)
+                .then(() => {
+                    alert('Success! Your request has been sent. We will get back to you shortly.');
+                    form.reset();
+                })
+                .catch((error) => {
+                    console.error('EmailJS Error:', error);
+                    alert('Failed to send message. Please try again or email us directly at info@pressstampingindustries.com');
+                })
+                .finally(() => {
+                    btn.textContent = originalText;
+                    btn.disabled = false;
+                });
+        });
+    });
+});
+
+// MEETING FORM (Special multi-step handling)
+function submitMeetingForm() {
+    const form = document.getElementById('meetingFormElement');
+    const btn = document.getElementById('confirmBtn');
+    
+    if (!form || !btn) return;
+
+    if (selectedDate && selectedSlot) {
+        const m = String(selectedDate.m + 1).padStart(2, '0');
+        const d = String(selectedDate.d).padStart(2, '0');
+        const dateStr = `${selectedDate.y}-${m}-${d}`;
+        const tz = document.getElementById('tzSelect')?.value || 'IST';
+
+        // Update hidden fields for form data collection
+        document.getElementById('hiddenDate').value = dateStr;
+        document.getElementById('hiddenTime').value = selectedSlot;
+        document.getElementById('hiddenTimezone').value = tz;
+
+        const originalText = btn.textContent;
+        btn.textContent = 'Scheduling...';
+        btn.disabled = true;
+
+        // Send via EmailJS
+        emailjs.sendForm(EMAILJS_CONFIG.serviceID, EMAILJS_CONFIG.templates.meeting, form)
+            .then(() => {
+                alert(`Meeting scheduled successfully!\n\nDate: ${dateStr}\nTime: ${selectedSlot} (${tz})\n\nWe've sent a confirmation to ${document.getElementById('meetEmail').value}.`);
+                form.reset();
+                goStep(1); // Go back to start of meeting scheduler
+                if (typeof switchContactTab === 'function') switchContactTab('contact'); // Optional: switch back
+            })
+            .catch((error) => {
+                console.error('EmailJS Error:', error);
+                alert('Failed to schedule meeting. Please check your connection and try again.');
+            })
+            .finally(() => {
+                btn.textContent = originalText;
+                btn.disabled = false;
+            });
+    }
 }
 
 // ── GALLERY FILTER ──

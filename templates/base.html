@@ -5,9 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Press Stamping Industries – Precision Metal Stamping{% endblock %}</title>
-    <meta name="description" content="{% block meta_description %}Press Stamping Industries – Precision metal stamping manufacturer serving automotive, aerospace, electronics and more. ISO certified, 30+ years of excellence.{% endblock %}">
+    <meta name="description" content="{% block meta_description %}Press Stamping Industries – Reputed manufacturer of sheet metal press components and fabrication components since 1979. ISO certified precision engineering.{% endblock %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Jost:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <link rel="icon" type="image/png" href="{% static 'images/psi-logo.png' %}">
     {% block extra_css %}{% endblock %}
@@ -59,10 +59,13 @@
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
         </a>
         <div class="dropdown">
-          <a href="{% url 'capabilities' %}">Metal Stamping</a>
-          <a href="{% url 'capabilities' %}">Deep Drawing</a>
-          <a href="{% url 'capabilities' %}">CNC Machining</a>
-          <a href="{% url 'capabilities' %}">Tool & Die Making</a>
+          <a href="{% url 'press_shop' %}">Press Shop</a>
+          <a href="{% url 'tool_shop' %}">Tool Shop</a>
+          <a href="{% url 'fabrication_shop' %}">Fabrication Shop</a>
+          <a href="{% url 'cutting_bending_shop' %}">Cutting & Bending</a>
+          <a href="{% url 'cnc_shop' %}">CNC Shop</a>
+          <a href="{% url 'paint_shop' %}">Paint Shop</a>
+          <a href="{% url 'measuring' %}">Measuring</a>
         </div>
       </li>
       <li>
@@ -70,12 +73,23 @@
           <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor"><path d="M7 10l5 5 5-5z"/></svg>
         </a>
         <div class="dropdown">
-          <a href="{% url 'industries' %}">Automotive</a>
-          <a href="{% url 'industries' %}">Railway</a>
-          <a href="{% url 'industries' %}">Power & Energy</a>
-          <a href="{% url 'industries' %}">Chemical</a>
-          <a href="{% url 'industries' %}">Packaging & Bottling</a>
-          <a href="{% url 'industries' %}">Industrial Machinery</a>
+          <a href="{% url 'industries' %}">Farming Systems</a>
+          <a href="{% url 'industries' %}">Bottling Plants</a>
+          <a href="{% url 'industries' %}">Mole Trap Equipments</a>
+          <a href="{% url 'industries' %}">Tyre Industries</a>
+          <a href="{% url 'industries' %}">Motors/Turbines Equipments</a>
+          <a href="{% url 'industries' %}">Railway Components</a>
+          <a href="{% url 'industries' %}">Chemical Equipments</a>
+          <a href="{% url 'industries' %}">Packaging Machines</a>
+          <a href="{% url 'industries' %}">Generator Parts</a>
+          <a href="{% url 'industries' %}">Chemical Industries</a>
+          <a href="{% url 'industries' %}">Paint Manufacturing</a>
+          <a href="{% url 'industries' %}">Transformer Parts</a>
+          <a href="{% url 'industries' %}">Heat Exchanger Parts</a>
+          <a href="{% url 'industries' %}">Automobile Parts</a>
+          <a href="{% url 'industries' %}">Wind Turbine</a>
+          <a href="{% url 'industries' %}">Solar Panel Systems</a>
+          <a href="{% url 'industries' %}">Damper Systems</a>
         </div>
       </li>
       <li><a href="{% url 'blog' %}">Blog</a></li>
@@ -95,7 +109,10 @@
   <nav class="mobile-nav">
     <a href="{% url 'home' %}">Home</a>
     <a href="{% url 'about' %}">About</a>
-    <a href="{% url 'capabilities' %}" class="sub">Capabilities</a>
+    <a href="{% url 'press_shop' %}" class="sub">Press Shop</a>
+    <a href="{% url 'tool_shop' %}" class="sub">Tool Shop</a>
+    <a href="{% url 'fabrication_shop' %}" class="sub">Fabrication Shop</a>
+    <a href="{% url 'cnc_shop' %}" class="sub">CNC Shop</a>
     <a href="{% url 'industries' %}" class="sub">Industries</a>
     <a href="{% url 'blog' %}" class="sub">Blog</a>
     <a href="{% url 'gallery' %}" class="sub">Gallery</a>
@@ -117,7 +134,7 @@
         <div class="footer-logo">
           <img src="{% static 'images/psi-logo.png' %}" alt="Press Stamping Industries" onerror="this.style.display='none';this.parentNode.innerHTML='<span style=\'font-family:var(--font-display);font-weight:700;font-size:18px;color:#fff;\'>PRESS STAMPING<br>INDUSTRIES</span>'">
         </div>
-        <p class="footer-desc">Precision metal stamping manufacturer serving 12+ industries since 1985. ISO 9001:2015 · ISO 45001:2018 certified.</p>
+        <p class="footer-desc">Reputed manufacturer of sheet metal and heavy machinery components serving 12+ industries since 1979. ISO 9001:2015 · ISO 45001:2018 certified.</p>
         <div class="footer-social">
           <a href="#" class="social-link">in</a>
           <a href="#" class="social-link">tw</a>
@@ -125,18 +142,21 @@
         </div>
       </div>
       <div class="footer-col">
-        <h4>Services</h4>
-        <a href="{% url 'capabilities' %}">Progressive Die Stamping</a>
-        <a href="{% url 'capabilities' %}">Deep Draw Stamping</a>
-        <a href="{% url 'capabilities' %}">Fine Blanking</a>
-        <a href="{% url 'capabilities' %}">Tool & Die Design</a>
-        <a href="{% url 'capabilities' %}">Secondary Operations</a>
+        <h4>Capabilities</h4>
+        <a href="{% url 'press_shop' %}">Press Shop</a>
+        <a href="{% url 'tool_shop' %}">Tool Shop</a>
+        <a href="{% url 'fabrication_shop' %}">Fabrication Shop</a>
+        <a href="{% url 'cutting_bending_shop' %}">Cutting & Bending</a>
+        <a href="{% url 'cnc_shop' %}">CNC Shop</a>
+        <a href="{% url 'paint_shop' %}">Paint Shop</a>
+        <a href="{% url 'measuring' %}">Measuring </a>
       </div>
       <div class="footer-col">
         <h4>Company</h4>
+        <a href="{% url 'home' %}">Home</a>
         <a href="{% url 'about' %}">About Us</a>
         <a href="{% url 'industries' %}">Industries Served</a>
-        <a href="{% url 'blog' %}">Blog & Insights</a>
+        <a href="{% url 'blog' %}">Latest Insights</a>
         <a href="{% url 'gallery' %}">Photo Gallery</a>
         <a href="{% url 'careers' %}">Careers</a>
       </div>
@@ -161,7 +181,24 @@
   </div>
 </footer>
 
-<script src="{% static 'js/script.js' %}"></script>
+  <!-- Scripts -->
+  <script src="{% static 'js/script.js' %}"></script>
+  
+  <!-- EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      // Get public key from a global variable or directly here
+      // Ideally this should be passed from Django settings if possible, 
+      // but for simplicity we'll use a placeholder or check for a global config
+      const publicKey = "{{ EMAILJS_PUBLIC_KEY|default:'YOUR_PUBLIC_KEY' }}";
+      if (publicKey !== 'YOUR_PUBLIC_KEY') {
+        emailjs.init({
+          publicKey: publicKey,
+        });
+      }
+    })();
+  </script>
 {% block extra_js %}{% endblock %}
 </body>
 </html>

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tool Shop – Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <!-- HERO -->
+  <div class="hero-sub" style="background-image: url('{% static 'images/hero-industrial.png' %}');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="reveal">
+        <h1 class="hero-title" style="font-size: clamp(32px, 5vw, 64px);">Tool <span>Shop</span></h1>
+        <p class="hero-subtitle">In-house tool design and maintenance for high-precision dies.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT TABLE -->
+  <section style="background:#fff;">
+    <div class="container">
+      <div class="shop-section reveal">
+        <h3 class="shop-title">Tool Shop Inventory</h3>
+        <div class="table-wrapper">
+          <table class="equipment-table">
+            <thead><tr><th>Sr.</th><th>Machine</th><th>Capacity</th><th>Qty</th><th>Make</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>Surface Grinder</td><td>600mm x 200mm</td><td>1</td><td>GMT</td></tr>
+              <tr><td>2</td><td>Radial Drill & Milling</td><td>Dia 50</td><td>1</td><td>Makwan Machine Tools</td></tr>
+              <tr><td>3</td><td>Radial Drill</td><td>Dia 50</td><td>1</td><td>GMT</td></tr>
+              <tr><td>4</td><td>Drill</td><td>Dia 31</td><td>1</td><td>Ghanshyam Machine Tools</td></tr>
+              <tr><td>5</td><td>Drill</td><td>Dia 18</td><td>7</td><td>Ghanshyam Machine Tools</td></tr>
+              <tr><td>6</td><td>DRO Milling</td><td>Table Size 1050x280mm</td><td>1</td><td>-</td></tr>
+              <tr><td>7</td><td>Lathe Machine</td><td>6ft</td><td>1</td><td>-</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div class="container">
+      <h2>Expert Tooling Solutions</h2>
+      <p>Our in-house tool room ensures the highest quality and rapid turnaround for custom dies.</p>
+      <a href="{% url 'quote' %}" class="btn-white">Request a Quote</a>
+    </div>
+  </div>
+{% endblock %}

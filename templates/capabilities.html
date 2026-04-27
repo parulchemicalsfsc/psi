@@ -13,166 +13,99 @@
     </div>
   </div>
 
-  <!-- MANUFACTURING PROCESSES -->
+
+  <!-- SHOP SELECTION GRID -->
   <section style="background:#fff;">
     <div class="container">
       <div class="reveal text-center">
-        <div class="section-label">What We Do</div>
-        <h2 class="section-title">Manufacturing Processes</h2>
+        <div class="section-label">Our Facilities</div>
+        <h2 class="section-title">Specialized Shop Capabilities</h2>
         <div class="divider-center"><div class="divider-red"></div></div>
-        <p class="section-sub mt-16">Advanced capabilities for complex component manufacturing</p>
+        <p class="section-sub mt-16">Explore our dedicated manufacturing and quality control departments.</p>
       </div>
 
-      <div class="services-grid reveal" style="margin-top:48px;">
-        <div class="service-card">
-          <div class="service-content">
-            <h3>Metal Stamping</h3>
-            <p>High-speed progressive and transfer stamping for complex parts.</p>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-content">
-            <h3>Deep Drawing</h3>
-            <p>Cylindrical and complex hollow components manufacturing.</p>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-content">
-            <h3>CNC Machining</h3>
-            <p>Precision machining and secondary operations.</p>
-          </div>
-        </div>
-        <div class="service-card">
-          <div class="service-content">
-            <h3>Tool & Die Making</h3>
-            <p>In-house design and manufacturing of custom tooling.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TECHNICAL SPECIFICATIONS -->
-  <section style="background:var(--cream);">
-    <div class="container">
-      <div class="reveal">
-        <div class="section-label">Technical Data</div>
-        <h2 class="section-title">Technical Specifications</h2>
-        <div class="divider-red"></div>
-        <p class="mt-16" style="color:var(--gray);">Our facilities are equipped to handle a wide range of specifications and materials, ensuring we meet your exact requirements.</p>
-      </div>
-
-      <div class="spec-grid reveal">
-        <div class="spec-card">
-          <h4>Capabilities</h4>
-          <ul class="spec-list">
-            <li><span>Material thickness</span><span>0.5mm to 6mm</span></li>
-            <li><span>Component size</span><span>Up to 500mm x 500mm</span></li>
-            <li><span>Tolerance</span><span>±0.01mm</span></li>
-            <li><span>Production capacity</span><span>5M pieces/month</span></li>
-          </ul>
-        </div>
-        <div class="spec-card">
-          <h4>Materials & Finish</h4>
-          <ul class="spec-list">
-            <li><span>Materials</span><span>MS, SS, Al, Cu, Brass</span></li>
-            <li><span>Surface treatments</span><span>Powder Coating</span></li>
-            <li><span>Secondary treatments</span><span>Electroplating</span></li>
-            <li><span>Advanced finish</span><span>Anodizing</span></li>
-          </ul>
-        </div>
-        <div class="spec-card">
-          <h4>Assurance</h4>
-          <ul class="spec-list">
-            <li><span>ISO Certified</span><span>9001:2015</span></li>
-            <li><span>Safety Certified</span><span>45001:2018</span></li>
-            <li><span>Inspection</span><span>100% Dimensional</span></li>
-            <li><span>Process Control</span><span>SPC Enabled</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- OUR MACHINERY -->
-  <section style="background:#fff;">
-    <div class="container">
-      <div class="reveal text-center">
-        <div class="section-label">The Factory Floor</div>
-        <h2 class="section-title">Our Machinery</h2>
-        <div class="divider-center"><div class="divider-red"></div></div>
-        <p class="section-sub mt-16">Advanced equipment for precision manufacturing</p>
-      </div>
-
-      <div class="machinery-grid reveal">
-        
-        <div class="machine-card">
+      <div class="machinery-grid reveal" style="margin-top:48px;">
+        <!-- Press Shop -->
+        <a href="{% url 'press_shop' %}" class="machine-card" style="text-decoration:none; color:inherit;">
           <div class="machine-header">
-            <h3>CNC Press Brakes</h3>
-            <span class="machine-count">8 Units</span>
+            <h3>Press Shop</h3>
+            <span class="machine-count">19 Units</span>
           </div>
           <div class="machine-stats">
-            <div class="m-stat"><label>Capacity</label><div>200 Ton</div></div>
+            <div class="m-stat"><label>Max Capacity</label><div>300 Ton</div></div>
           </div>
-          <p>Precision bending up to 6mm thickness with high repeatability.</p>
-        </div>
+          <p>High-precision power and hydraulic presses for versatile stamping needs.</p>
+          <span style="color:var(--red); font-weight:700; font-size:12px; text-transform:uppercase;">View Inventory &rarr;</span>
+        </a>
 
-        <div class="machine-card">
+        <!-- Tool Shop -->
+        <a href="{% url 'tool_shop' %}" class="machine-card" style="text-decoration:none; color:inherit;">
           <div class="machine-header">
-            <h3>Progressive Dies</h3>
-            <span class="machine-count">12 Units</span>
+            <h3>Tool Shop</h3>
+            <span class="machine-count">7 Units</span>
           </div>
           <div class="machine-stats">
-            <div class="m-stat"><label>Capacity</label><div>150 Ton</div></div>
+            <div class="m-stat"><label>Service</label><div>In-house Die Maker</div></div>
           </div>
-          <p>Multi-station high-speed stamping for high-volume production.</p>
-        </div>
+          <p>Specialized tool room for maintenance and new die development.</p>
+          <span style="color:var(--red); font-weight:700; font-size:12px; text-transform:uppercase;">View Inventory &rarr;</span>
+        </a>
 
-        <div class="machine-card">
+        <!-- Fabrication Shop -->
+        <a href="{% url 'fabrication_shop' %}" class="machine-card" style="text-decoration:none; color:inherit;">
           <div class="machine-header">
-            <h3>Hydraulic Presses</h3>
-            <span class="machine-count">6 Units</span>
+            <h3>Fabrication Shop</h3>
+            <span class="machine-count">20 Units</span>
           </div>
           <div class="machine-stats">
-            <div class="m-stat"><label>Capacity</label><div>300 Ton</div></div>
+            <div class="m-stat"><label>Welding</label><div>MIG / TIG / ARC</div></div>
           </div>
-          <p>Deep drawing and forming operations for complex geometries.</p>
-        </div>
+          <p>Comprehensive fabrication and structural welding capabilities.</p>
+          <span style="color:var(--red); font-weight:700; font-size:12px; text-transform:uppercase;">View Inventory &rarr;</span>
+        </a>
 
-        <div class="machine-card">
+        <!-- Cutting & Bending -->
+        <a href="{% url 'cutting_bending_shop' %}" class="machine-card" style="text-decoration:none; color:inherit;">
           <div class="machine-header">
-            <h3>CNC Machining Centers</h3>
-            <span class="machine-count">5 Units</span>
-          </div>
-          <div class="machine-stats">
-            <div class="m-stat"><label>Capacity</label><div>Various</div></div>
-          </div>
-          <p>Precision machining and finishing for complex components.</p>
-        </div>
-
-        <div class="machine-card">
-          <div class="machine-header">
-            <h3>Wire EDM</h3>
-            <span class="machine-count">3 Units</span>
-          </div>
-          <div class="machine-stats">
-            <div class="m-stat"><label>Capacity</label><div>High Precision</div></div>
-          </div>
-          <p>Complex die cutting and tool making with extreme accuracy.</p>
-        </div>
-
-        <div class="machine-card">
-          <div class="machine-header">
-            <h3>Quality Inspection</h3>
+            <h3>Cutting & Bending</h3>
             <span class="machine-count">4 Units</span>
           </div>
           <div class="machine-stats">
-            <div class="m-stat"><label>Capacity</label><div>CMM + Optical</div></div>
+            <div class="m-stat"><label>Shearing</label><div>Up to 200T</div></div>
           </div>
-          <p>100% dimensional verification ensuring zero-defect delivery.</p>
-        </div>
+          <p>Heavy-duty shearing and CNC bending for plate processing.</p>
+          <span style="color:var(--red); font-weight:700; font-size:12px; text-transform:uppercase;">View Inventory &rarr;</span>
+        </a>
 
+        <!-- CNC Shop -->
+        <a href="{% url 'cnc_shop' %}" class="machine-card" style="text-decoration:none; color:inherit;">
+          <div class="machine-header">
+            <h3>CNC Shop</h3>
+            <span class="machine-count">5 Units</span>
+          </div>
+          <div class="machine-stats">
+            <div class="m-stat"><label>Tech</label><div>Laser / Plasma</div></div>
+          </div>
+          <p>Advanced CNC cutting centers for high-precision plate work.</p>
+          <span style="color:var(--red); font-weight:700; font-size:12px; text-transform:uppercase;">View Inventory &rarr;</span>
+        </a>
+
+        <!-- Measuring & QC -->
+        <a href="{% url 'measuring' %}" class="machine-card" style="text-decoration:none; color:inherit;">
+          <div class="machine-header">
+            <h3>Measuring & QC</h3>
+            <span class="machine-count">18 Units</span>
+          </div>
+          <div class="machine-stats">
+            <div class="m-stat"><label>Standard</label><div>ISO Certified</div></div>
+          </div>
+          <p>Precision inspection instruments ensuring zero-defect production.</p>
+          <span style="color:var(--red); font-weight:700; font-size:12px; text-transform:uppercase;">View Inventory &rarr;</span>
+        </a>
       </div>
+    </div>
+  </section>
+
     </div>
   </section>
 

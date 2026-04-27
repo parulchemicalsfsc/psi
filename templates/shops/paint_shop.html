@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Paint Shop – Press Stamping Industries{% endblock %}
+
+{% block content %}
+  <!-- HERO -->
+  <div class="hero-sub" style="background-image: url('{% static 'images/hero-industrial.png' %}');">
+    <div class="hero-overlay"></div>
+    <div class="container">
+      <div class="reveal">
+        <h1 class="hero-title" style="font-size: clamp(32px, 5vw, 64px);">Paint <span>Shop</span></h1>
+        <p class="hero-subtitle">Industrial-grade surface treatment and painting facilities.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT TABLE -->
+  <section style="background:#fff;">
+    <div class="container">
+      <div class="shop-section reveal">
+        <h3 class="shop-title">Paint Shop Inventory</h3>
+        <div class="table-wrapper">
+          <table class="equipment-table">
+            <thead><tr><th>Sr.</th><th>Machine</th><th>Capacity</th><th>Qty</th><th>Make</th></tr></thead>
+            <tbody>
+              <tr><td>1</td><td>7 Tank Process</td><td>1200 x 600 x 600</td><td>1</td><td>Self Made</td></tr>
+              <tr><td>2</td><td>Paint Booth</td><td>-</td><td>1</td><td>Self Made</td></tr>
+              <tr><td>3</td><td>Reciprocating Compressor Air Drier</td><td>5 HP</td><td>1</td><td>Elgi</td></tr>
+              <tr><td>4</td><td>Over Head Crane</td><td>2 Tons</td><td>1</td><td>Sahjanand</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-banner reveal">
+    <div class="container">
+      <h2>Professional Surface Finishing</h2>
+      <p>High-durability industrial painting and chemical surface preparation.</p>
+      <a href="{% url 'quote' %}" class="btn-white">Request a Quote</a>
+    </div>
+  </div>
+{% endblock %}

@@ -60,7 +60,7 @@
         
         <div class="careers-form">
           <h3>Apply For A Position</h3>
-          <form action="{% url 'careers' %}" method="POST" enctype="multipart/form-data">
+          <form action="{% url 'careers' %}" method="POST" enctype="multipart/form-data" class="quote-form">
             {% csrf_token %}
             <div class="form-group">
               <label class="form-group-name">Full Name *</label>
