@@ -159,13 +159,13 @@ function checkMeetingForm(){
 }
 // ── FORM SUBMISSIONS (EMAILJS) ──
 const EMAILJS_CONFIG = window.EMAILJS_CONFIG || {
-    serviceID: 'service_v1ehhxe', 
+    serviceID: '', 
     publicKey: '',
     templates: {
-        contact: 'template_contact',
-        meeting: 'template_meeting',
-        quote: 'template_quote',
-        careers: 'template_careers'
+        contact: '',
+        meeting: '',
+        quote: '',
+        careers: ''
     }
 };
 
