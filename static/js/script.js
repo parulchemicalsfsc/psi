@@ -158,10 +158,9 @@ function checkMeetingForm(){
   }
 }
 // ── FORM SUBMISSIONS (EMAILJS) ──
-// NOTE: You must update these IDs with your actual EmailJS credentials
-const EMAILJS_CONFIG = {
-    serviceID: 'service_psi', 
-    publicKey: 'YOUR_PUBLIC_KEY',
+const EMAILJS_CONFIG = window.EMAILJS_CONFIG || {
+    serviceID: 'service_v1ehhxe', 
+    publicKey: '',
     templates: {
         contact: 'template_contact',
         meeting: 'template_meeting',
@@ -171,10 +170,7 @@ const EMAILJS_CONFIG = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize EmailJS if public key is provided in config
-    if (typeof emailjs !== 'undefined' && EMAILJS_CONFIG.publicKey !== 'YOUR_PUBLIC_KEY') {
-        emailjs.init(EMAILJS_CONFIG.publicKey);
-    }
+    // Note: EmailJS is already initialized in base.html
 
     // Handle all quote/contact/careers forms
     const forms = document.querySelectorAll('.quote-form');

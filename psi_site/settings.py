@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.media',
+                'core.context_processors.emailjs_settings',
             ],
         },
     },
@@ -162,4 +163,11 @@ else:
     # For Excel reading in core/views.py
     EXCEL_PATH = BASE_DIR / 'static' / 'images' / 'updated client list.xlsx'
 
+# EmailJS Configuration
+EMAILJS_SERVICE_ID = env('EMAILJS_SERVICE_ID', default='')
+EMAILJS_PUBLIC_KEY = env('EMAILJS_PUBLIC_KEY', default='')
+EMAILJS_CONTACT_TEMPLATE_ID = env('EMAILJS_CONTACT_TEMPLATE_ID', default='')
+EMAILJS_MEETING_TEMPLATE_ID = env('EMAILJS_MEETING_TEMPLATE_ID', default='')
+
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

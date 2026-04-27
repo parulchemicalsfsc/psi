@@ -188,13 +188,21 @@
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script type="text/javascript">
     (function() {
-      // Get public key from a global variable or directly here
-      // Ideally this should be passed from Django settings if possible, 
-      // but for simplicity we'll use a placeholder or check for a global config
-      const publicKey = "{{ EMAILJS_PUBLIC_KEY|default:'YOUR_PUBLIC_KEY' }}";
-      if (publicKey !== 'YOUR_PUBLIC_KEY') {
+      // Global config object for script.js to use
+      window.EMAILJS_CONFIG = {
+        serviceID: "{{ EMAILJS_SERVICE_ID|default:'' }}",
+        publicKey: "{{ EMAILJS_PUBLIC_KEY|default:'' }}",
+        templates: {
+          contact: "{{ EMAILJS_CONTACT_TEMPLATE_ID|default:'template_contact' }}",
+          meeting: "{{ EMAILJS_MEETING_TEMPLATE_ID|default:'template_meeting' }}",
+          quote: "template_quote",
+          careers: "template_careers"
+        }
+      };
+
+      if (window.EMAILJS_CONFIG.publicKey) {
         emailjs.init({
-          publicKey: publicKey,
+          publicKey: window.EMAILJS_CONFIG.publicKey,
         });
       }
     })();
