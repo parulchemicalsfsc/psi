@@ -159,7 +159,7 @@
 
       <div class="client-grid-v2 reveal" style="margin-top:60px;">
         {% for client in clients %}
-        <div class="client-card-v2">
+        <a href="{{ client.website }}" target="_blank" class="client-card-v2" style="text-decoration: none; color: inherit;">
           <div class="client-card-logo">
             <img src="{% static client.logo %}" alt="{{ client.name }}" onerror="this.style.display='none'">
           </div>
@@ -170,43 +170,8 @@
               <p class="client-since">Since {{ client.since }}</p>
             </div>
           </div>
-        </div>
+        </a>
         {% endfor %}
-      </div>
-    </div>
-  </section>
-
-  <!-- PRECISION WORKFLOW -->
-  <section class="workflow-section">
-    <div class="container">
-      <div class="reveal text-center">
-        <div class="section-label">Our Process</div>
-        <h2 class="section-title">Precision Workflow</h2>
-        <div class="divider-center"><div class="divider-red"></div></div>
-        <p class="section-sub mt-16">A systematic approach to engineering excellence, from initial concept to high-volume delivery.</p>
-      </div>
-      
-      <div class="workflow-grid reveal">
-        <div class="workflow-item">
-          <span class="workflow-step">01</span>
-          <h3>Design & Engineering</h3>
-          <p>Collaborative engineering using advanced CAD/CAM integration to optimize part design for manufacturability (DFM).</p>
-        </div>
-        <div class="workflow-item">
-          <span class="workflow-step">02</span>
-          <h3>Precision Tooling</h3>
-          <p>In-house tool and die development ensuring absolute control over component geometry and production longevity.</p>
-        </div>
-        <div class="workflow-item">
-          <span class="workflow-step">03</span>
-          <h3>Volume Production</h3>
-          <p>High-speed automated press lines delivering consistent results across massive production runs with minimal downtime.</p>
-        </div>
-        <div class="workflow-item">
-          <span class="workflow-step">04</span>
-          <h3>Quality Control</h3>
-          <p>Rigorous 100% inspection protocols and full material traceability meeting the strictest global industry standards.</p>
-        </div>
       </div>
     </div>
   </section>

@@ -28,12 +28,16 @@ def home(request):
                     continue
                     
                 logo_filename = name.lower().replace(' ', '_').replace('.', '').replace('/', '_') + '.png'
+                website = str(row[website_col]).strip() if website_col and pd.notna(row[website_col]) else '#'
+                if website != '#' and not (website.startswith('http://') or website.startswith('https://')):
+                    website = 'https://' + website
+
                 clients.append({
                     'name': name,
                     'short': "".join([w[0] for w in name.split() if w[0].isupper()]) or name[:2].upper(),
                     'industry': row[ind_col],
                     'since': row[since_col],
-                    'website': row[website_col] if website_col else '#',
+                    'website': website,
                     'logo': f'images/logos/{logo_filename}'
                 })
     except Exception as e:

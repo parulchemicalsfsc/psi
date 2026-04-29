@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'storages',
     'core',
@@ -53,7 +52,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -61,6 +59,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+if not DEBUG:
+    MIDDLEWARE.insert(1, 'whitenoise.middleware.WhiteNoiseMiddleware')
+
 
 ROOT_URLCONF = 'psi_site.urls'
 

@@ -273,6 +273,32 @@ function initReveal(){
   els.forEach(el=>{io.observe(el);});
 }
 
+// ── LIGHTBOX ──
+function openLightbox(src, title) {
+  const modal = document.getElementById('lightboxModal');
+  const img = document.getElementById('lightboxImg');
+  const caption = document.getElementById('lightboxCaption');
+  if (modal && img) {
+    modal.style.display = 'block';
+    img.src = src;
+    if (caption) caption.textContent = title;
+    document.body.style.overflow = 'hidden'; // Prevent scrolling
+  }
+}
+
+function closeLightbox() {
+  const modal = document.getElementById('lightboxModal');
+  if (modal) {
+    modal.style.display = 'none';
+    document.body.style.overflow = 'auto';
+  }
+}
+
+// Handle ESC key for lightbox
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',()=>{
   renderCalendar();

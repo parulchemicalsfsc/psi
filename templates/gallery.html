@@ -18,15 +18,15 @@
       
       <div style="display:flex;gap:12px;margin-top:32px;flex-wrap:wrap;">
         <button onclick="filterGallery('all')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">All Projects</button>
-        <button onclick="filterGallery('automotive')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">Automotive</button>
-        <button onclick="filterGallery('aerospace')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">Aerospace</button>
-        <button onclick="filterGallery('electronics')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">Electronics</button>
-        <button onclick="filterGallery('tools')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">Tools & Dies</button>
+        <button onclick="filterGallery('company-components')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">Company Components</button>
+        <button onclick="filterGallery('kirloskar')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">Kirloskar Projects</button>
+        <button onclick="filterGallery('machine')" class="spec-tag" style="border:none;cursor:pointer;padding:8px 16px;">Machines</button>
       </div>
 
       <div class="gallery-grid">
         {% for item in items %}
-        <div class="gallery-item {% if forloop.counter|divisibleby:5 %}tall{% endif %}" data-category="{{ item.category|lower }}">
+        <div class="gallery-item {% if item.is_tall %}tall{% elif item.is_wide %}wide{% endif %}" data-category="{{ item.category|lower }}" 
+             style="cursor:pointer;" onclick="openLightbox('{{ item.image.url }}', '{{ item.title }}')">
           {% if item.image %}
             <img src="{{ item.image.url }}" alt="{{ item.title }}" style="width:100%;height:100%;object-fit:cover;">
           {% else %}
@@ -35,13 +35,18 @@
           <div class="gallery-overlay"><span>{{ item.title }}</span></div>
         </div>
         {% empty %}
-        <!-- Static placeholders if no items in DB yet -->
-        <div class="gallery-item" data-category="automotive"><div class="gallery-icon">⚙</div><div class="gallery-overlay"><span>Automotive Bracket</span></div></div>
-        <div class="gallery-item tall" data-category="aerospace"><div class="gallery-icon">✈</div><div class="gallery-overlay"><span>Aero Wing Rib</span></div></div>
-        <div class="gallery-item wide" data-category="electronics"><div class="gallery-icon">📱</div><div class="gallery-overlay"><span>Mobile Chassis</span></div></div>
-        <div class="gallery-item" data-category="tools"><div class="gallery-icon">🛠</div><div class="gallery-overlay"><span>Progressive Die Set</span></div></div>
+        <div style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+          <p>No images found in the gallery yet.</p>
+        </div>
         {% endfor %}
       </div>
     </div>
   </section>
+
+  <!-- LIGHTBOX MODAL -->
+  <div id="lightboxModal" class="lightbox-modal" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightboxImg">
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+  </div>
 {% endblock %}

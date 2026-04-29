@@ -26,10 +26,9 @@ class BlogPost(models.Model):
 
 class GalleryItem(models.Model):
     CATEGORY_CHOICES = [
-        ('automotive', 'Automotive'),
-        ('aerospace', 'Aerospace'),
-        ('electronics', 'Electronics'),
-        ('tools', 'Tools & Dies'),
+        ('company-components', 'Company Components'),
+        ('kirloskar', 'Kirloskar Projects'),
+        ('machine', 'Machines'),
     ]
     title = models.CharField(max_length=100)
     category = models.CharField(max_length=50, choices=CATEGORY_CHOICES)
