@@ -34,7 +34,13 @@ SECRET_KEY = env('SECRET_KEY', default='django-insecure-fallback-for-dev-only')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.vercel.app', 'localhost', '127.0.0.1'])
+ALLOWED_HOSTS = env.list('ALLOWED_HOSTS', default=['.vercel.app', 'localhost', '127.0.0.1', 'pressstampingindustries.com', 'www.pressstampingindustries.com'])
+
+CSRF_TRUSTED_ORIGINS = env.list('CSRF_TRUSTED_ORIGINS', default=['https://pressstampingindustries.com', 'https://www.pressstampingindustries.com', 'https://*.vercel.app'])
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+
 
 
 # Application definition
