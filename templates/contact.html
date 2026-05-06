@@ -68,8 +68,7 @@
       </div>
       <div class="contact-form-wrap">
         <h3>Send Us A Message</h3>
-        <form action="{% url 'contact' %}" method="POST" class="quote-form">
-          {% csrf_token %}
+        <form id="contactForm" class="quote-form" novalidate>
           <div class="form-row">
             <div class="form-group"><label class="form-group-name">First Name</label><input type="text" name="first_name" placeholder="First name" required></div>
             <div class="form-group"><label class="form-group-name">Last Name</label><input type="text" name="last_name" placeholder="Last name" required></div>
@@ -90,7 +89,8 @@
             </select>
           </div>
           <div class="form-group"><label class="form-group-name">Message</label><textarea name="message" rows="5" placeholder="Tell us about your project, part requirements, or any questions you have..." required></textarea></div>
-          <button type="submit" class="btn-primary" style="width:100%;">Send Message</button>
+          <button type="submit" id="contactSubmitBtn" class="btn-primary" style="width:100%;">Send Message</button>
+          <div id="contactStatus" style="margin-top:12px;text-align:center;font-size:14px;display:none;"></div>
         </form>
       </div>
     </div>
@@ -152,8 +152,7 @@
         <!-- STEP 3: Personal Details -->
         <div class="step-content" id="step3">
           <div class="meeting-summary" id="meetingSummary"></div>
-          <form id="meetingFormElement" action="{% url 'book_meeting' %}" method="POST" class="meeting-form">
-            {% csrf_token %}
+          <form id="meetingFormElement" class="meeting-form" novalidate>
             <input type="hidden" name="date" id="hiddenDate">
             <input type="hidden" name="time" id="hiddenTime">
             <input type="hidden" name="timezone" id="hiddenTimezone">
@@ -180,6 +179,7 @@
             <div class="step-nav">
               <button type="button" class="btn-secondary" onclick="goStep(2)" style="color:var(--charcoal);border-color:var(--mid-gray);">← Back</button>
               <button type="button" class="btn-primary" id="confirmBtn" onclick="submitMeetingForm()" disabled style="opacity:.4;">Confirm Meeting ✓</button>
+              <div id="meetingStatus" style="margin-top:12px;text-align:center;font-size:14px;display:none;"></div>
             </div>
           </form>
         </div>
@@ -189,13 +189,93 @@
 {% endblock %}
 
 {% block extra_js %}
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
-    // Handle tab switching from URL parameter
-    document.addEventListener('DOMContentLoaded', () => {
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('tab') === 'meeting') {
-            switchContactTab('meeting');
-        }
+  (function() {
+    emailjs.init({ publicKey: 'FD92RbntVb1vKW23Z' });
+  })();
+
+  const EMAILJS_SERVICE_ID  = 'service_v1ehhxe';
+  const EMAILJS_CONTACT_TID = 'template_pwp7td5';
+  const EMAILJS_MEETING_TID = 'template_b06pefa';
+
+  // ── Helper: show status message ──────────────────────────────────────────
+  function showStatus(elId, success, msg) {
+    const el = document.getElementById(elId);
+    if (!el) return;
+    el.style.display = 'block';
+    el.style.color   = success ? '#16a34a' : '#dc2626';
+    el.textContent   = msg;
+  }
+
+  // ── Contact Form ─────────────────────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    // Tab switching from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('tab') === 'meeting') switchContactTab('meeting');
+
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      if (!contactForm.checkValidity()) {
+        contactForm.reportValidity();
+        return;
+      }
+
+      const btn = document.getElementById('contactSubmitBtn');
+      btn.disabled    = true;
+      btn.textContent = 'Sending…';
+      showStatus('contactStatus', true, '');
+
+      emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_CONTACT_TID, contactForm)
+        .then(() => {
+          showStatus('contactStatus', true, '✅ Message sent! We will get back to you soon.');
+          contactForm.reset();
+          btn.textContent = 'Send Message';
+          btn.disabled    = false;
+        })
+        .catch((err) => {
+          console.error('EmailJS error:', err);
+          showStatus('contactStatus', false, '❌ Failed to send message. Please email us at presstamping@gmail.com');
+          btn.textContent = 'Send Message';
+          btn.disabled    = false;
+        });
     });
+  });
+
+  // ── Meeting Form (called from existing submitMeetingForm()) ───────────────
+  function submitMeetingForm() {
+    const form = document.getElementById('meetingFormElement');
+    const name    = document.getElementById('meetName')?.value.trim();
+    const company = document.getElementById('meetCompany')?.value.trim();
+    const email   = document.getElementById('meetEmail')?.value.trim();
+    const purpose = document.getElementById('meetPurpose')?.value;
+
+    if (!name || !company || !email || !purpose) {
+      showStatus('meetingStatus', false, 'Please fill in all required fields.');
+      return;
+    }
+
+    const btn = document.getElementById('confirmBtn');
+    btn.disabled    = true;
+    btn.textContent = 'Sending…';
+    showStatus('meetingStatus', true, '');
+
+    emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_MEETING_TID, form)
+      .then(() => {
+        showStatus('meetingStatus', true, '✅ Meeting confirmed! Check your email for details.');
+        btn.textContent = 'Confirm Meeting ✓';
+        btn.disabled    = false;
+      })
+      .catch((err) => {
+        console.error('EmailJS error:', err);
+        showStatus('meetingStatus', false, '❌ Booking failed. Please email us at presstamping@gmail.com');
+        btn.textContent = 'Confirm Meeting ✓';
+        btn.disabled    = false;
+      });
+  }
 </script>
 {% endblock %}
