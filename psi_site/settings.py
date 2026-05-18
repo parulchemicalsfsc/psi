@@ -16,7 +16,7 @@ import environ
 
 # Initialize environment variables
 env = environ.Env(
-    DEBUG=(bool, False)
+    DEBUG=(bool, True)
 )
 # Read .env file if it exists
 environ.Env.read_env(os.path.join(Path(__file__).resolve().parent.parent, '.env'))
@@ -53,10 +53,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'storages',
+    'rest_framework',
+    'corsheaders',
     'core',
+    'rfq',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -178,4 +182,19 @@ EMAILJS_CONTACT_TEMPLATE_ID = env('EMAILJS_CONTACT_TEMPLATE_ID', default='')
 EMAILJS_MEETING_TEMPLATE_ID = env('EMAILJS_MEETING_TEMPLATE_ID', default='')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+}
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+
+FILE_UPLOAD_MAX_MEMORY_SIZE = 20 * 1024 * 1024
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20 * 1024 * 1024
 

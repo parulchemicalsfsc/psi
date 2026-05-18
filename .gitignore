@@ -159,3 +159,8 @@ Thumbs.db
 
 # VS Code
 .vscode/
+
+# React RFQ Frontend local development files
+rfq_react/node_modules/
+rfq_react/build/
+rfq_react/.cache/
