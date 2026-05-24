@@ -45,7 +45,7 @@
           </div>
           <div>
             <h5>Email</h5>
-            <a href="mailto:presstamping@gmail.com">presstamping@gmail.com</a>
+            <a href="mailto:design2.pressstamping@gmail.com">design2.pressstamping@gmail.com</a>
           </div>
         </div>
         <div class="contact-detail">
@@ -230,6 +230,34 @@
       btn.textContent = 'Sending…';
       showStatus('contactStatus', true, '');
 
+      // Send to Lead Management System
+      const firstName = contactForm.querySelector('[name="first_name"]').value.trim();
+      const lastName = contactForm.querySelector('[name="last_name"]').value.trim();
+      const emailVal = contactForm.querySelector('[name="email"]').value.trim();
+      const phoneVal = contactForm.querySelector('[name="phone"]').value.trim();
+      const companyVal = contactForm.querySelector('[name="company"]').value.trim();
+      const subjectVal = contactForm.querySelector('[name="subject"]').value;
+      const messageVal = contactForm.querySelector('[name="message"]').value.trim();
+
+      const leadPayload = {
+        source_website: "Press Stamping Industries",
+        full_name: firstName + ' ' + lastName,
+        email: emailVal,
+        phone: phoneVal,
+        company_name: companyVal,
+        product_interest: subjectVal,
+        message: messageVal
+      };
+
+      fetch("https://pc-sales-8phu.onrender.com/api/leads/intake", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-API-Key": "PCSALES"
+        },
+        body: JSON.stringify(leadPayload)
+      }).catch(err => console.error("LMS Error:", err));
+
       emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_CONTACT_TID, contactForm)
         .then(() => {
           showStatus('contactStatus', true, '✅ Message sent! We will get back to you soon.');
@@ -239,7 +267,7 @@
         })
         .catch((err) => {
           console.error('EmailJS error:', err);
-          showStatus('contactStatus', false, '❌ Failed to send message. Please email us at presstamping@gmail.com');
+          showStatus('contactStatus', false, '❌ Failed to send message. Please email us at design2.pressstamping@gmail.com');
           btn.textContent = 'Send Message';
           btn.disabled    = false;
         });
@@ -264,6 +292,28 @@
     btn.textContent = 'Sending…';
     showStatus('meetingStatus', true, '');
 
+    const phone   = document.getElementById('meetPhone')?.value.trim() || "";
+    const notes   = form.querySelector('[name="notes"]')?.value.trim() || "";
+
+    const leadPayload = {
+      source_website: "Press Stamping Industries",
+      full_name: name,
+      email: email,
+      phone: phone,
+      company_name: company,
+      product_interest: purpose,
+      message: notes
+    };
+
+    fetch("https://pc-sales-8phu.onrender.com/api/leads/intake", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "X-API-Key": "PCSALES"
+      },
+      body: JSON.stringify(leadPayload)
+    }).catch(err => console.error("LMS Error:", err));
+
     emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_MEETING_TID, form)
       .then(() => {
         showStatus('meetingStatus', true, '✅ Meeting confirmed! Check your email for details.');
@@ -272,7 +322,7 @@
       })
       .catch((err) => {
         console.error('EmailJS error:', err);
-        showStatus('meetingStatus', false, '❌ Booking failed. Please email us at presstamping@gmail.com');
+        showStatus('meetingStatus', false, '❌ Booking failed. Please email us at design2.pressstamping@gmail.com');
         btn.textContent = 'Confirm Meeting ✓';
         btn.disabled    = false;
       });

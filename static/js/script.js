@@ -200,7 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 })
                 .catch((error) => {
                     console.error('EmailJS Error:', error);
-                    alert('Failed to send message. Please try again or email us directly at presstamping@gmail.com');
+                    alert('Failed to send message. Please try again or email us directly at design2.pressstamping@gmail.com');
                 })
                 .finally(() => {
                     btn.textContent = originalText;
