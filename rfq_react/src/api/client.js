@@ -44,7 +44,11 @@ export const inquiryAPI = {
     if (supabaseAnonKey) supabaseAnonKey = supabaseAnonKey.replace(/['"]/g, '').trim();
 
     console.log("[Supabase RFQ] Connecting to URL:", supabaseUrl);
-    console.log("[Supabase RFQ] Key loaded:", !!supabaseAnonKey);
+    if (supabaseAnonKey) {
+      console.log("[Supabase RFQ] Key loaded: true (Preview: " + supabaseAnonKey.substring(0, 10) + "..." + supabaseAnonKey.substring(supabaseAnonKey.length - 10) + ")");
+    } else {
+      console.log("[Supabase RFQ] Key loaded: false");
+    }
 
     if (!supabaseUrl || !supabaseAnonKey) {
       // Fallback to Django endpoint if Supabase keys are not configured
@@ -71,64 +75,69 @@ export const inquiryAPI = {
       data.quantity = parseInt(data.quantity, 10);
     }
 
-    // Post inquiry metadata to Supabase 'inquiries' table
-    const inquiryRes = await axios.post(`${supabaseUrl}/rest/v1/inquiries`, data, {
-      headers: {
-        'apikey': supabaseAnonKey,
-        'Authorization': `Bearer ${supabaseAnonKey}`,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=representation'
-      }
-    });
+    try {
+      // Post inquiry metadata to Supabase 'inquiries' table
+      const inquiryRes = await axios.post(`${supabaseUrl}/rest/v1/inquiries`, data, {
+        headers: {
+          'apikey': supabaseAnonKey,
+          'Authorization': `Bearer ${supabaseAnonKey}`,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=representation'
+        }
+      });
 
-    const inquiry = inquiryRes.data[0];
+      const inquiry = inquiryRes.data[0];
 
-    // Handle files if there are any
-    const files = formData.getAll('files');
-    if (files && files.length > 0) {
-      for (const file of files) {
-        try {
-          // 1. Upload file binary to Supabase Storage bucket 'inquiry-files'
-          // Path structure: <inquiry_id>/<file_name>
-          const storagePath = `${inquiry.id}/${file.name}`;
-          await axios.post(
-            `${supabaseUrl}/storage/v1/object/inquiry-files/${storagePath}`,
-            file,
-            {
-              headers: {
-                'apikey': supabaseAnonKey,
-                'Authorization': `Bearer ${supabaseAnonKey}`,
-                'Content-Type': file.type
+      // Handle files if there are any
+      const files = formData.getAll('files');
+      if (files && files.length > 0) {
+        for (const file of files) {
+          try {
+            // 1. Upload file binary to Supabase Storage bucket 'inquiry-files'
+            // Path structure: <inquiry_id>/<file_name>
+            const storagePath = `${inquiry.id}/${file.name}`;
+            await axios.post(
+              `${supabaseUrl}/storage/v1/object/inquiry-files/${storagePath}`,
+              file,
+              {
+                headers: {
+                  'apikey': supabaseAnonKey,
+                  'Authorization': `Bearer ${supabaseAnonKey}`,
+                  'Content-Type': file.type
+                }
               }
-            }
-          );
+            );
 
-          // 2. Insert record into 'inquiry_files' table (matching Django DB schema)
-          await axios.post(
-            `${supabaseUrl}/rest/v1/inquiry_files`,
-            {
-              inquiry_id: inquiry.id,
-              file: `inquiry_files/${storagePath}`,
-              original_name: file.name,
-              file_size: file.size
-            },
-            {
-              headers: {
-                'apikey': supabaseAnonKey,
-                'Authorization': `Bearer ${supabaseAnonKey}`,
-                'Content-Type': 'application/json'
+            // 2. Insert record into 'inquiry_files' table (matching Django DB schema)
+            await axios.post(
+              `${supabaseUrl}/rest/v1/inquiry_files`,
+              {
+                inquiry_id: inquiry.id,
+                file: `inquiry_files/${storagePath}`,
+                original_name: file.name,
+                file_size: file.size
+              },
+              {
+                headers: {
+                  'apikey': supabaseAnonKey,
+                  'Authorization': `Bearer ${supabaseAnonKey}`,
+                  'Content-Type': 'application/json'
+                }
               }
-            }
-          );
-        } catch (fileErr) {
-          console.error("Failed to upload file to Supabase:", file.name, fileErr);
+            );
+          } catch (fileErr) {
+            console.error("Failed to upload file to Supabase:", file.name, fileErr);
+          }
         }
       }
-    }
 
-    return {
-      data: inquiry
-    };
+      return {
+        data: inquiry
+      };
+    } catch (err) {
+      console.error("[Supabase RFQ] Submission failed. Supabase response details:", err.response?.data);
+      throw err;
+    }
   },
   list: (params) => api.get("/inquiries/", { params }),
   detail: (id) => api.get(`/inquiries/${id}/`),
