@@ -100,9 +100,15 @@ WSGI_APPLICATION = 'psi_site.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 # Database configuration
+db_url_var = None
 if env('DATABASE_URL', default=None):
+    db_url_var = 'DATABASE_URL'
+elif env('POSTGRES_URL', default=None):
+    db_url_var = 'POSTGRES_URL'
+
+if db_url_var:
     DATABASES = {
-        'default': env.db(),
+        'default': env.db(db_url_var),
     }
 else:
     DATABASES = {
