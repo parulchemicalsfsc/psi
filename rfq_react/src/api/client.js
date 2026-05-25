@@ -63,6 +63,20 @@ export const inquiryAPI = {
       }
     });
 
+    // Helper to generate UUID v4 locally
+    const generateUUID = () => {
+      if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+        return crypto.randomUUID();
+      }
+      return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        const r = Math.random() * 16 | 0, v = c === 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+      });
+    };
+
+    const inquiryId = generateUUID();
+    data.id = inquiryId;
+
     // Generate ref_number locally if not present (to match backend behavior)
     if (!data.ref_number) {
       const ts = new Date().toISOString().slice(2, 10).replace(/-/g, '');
@@ -77,16 +91,15 @@ export const inquiryAPI = {
 
     try {
       // Post inquiry metadata to Supabase 'inquiries' table
-      const inquiryRes = await axios.post(`${supabaseUrl}/rest/v1/inquiries`, data, {
+      await axios.post(`${supabaseUrl}/rest/v1/inquiries`, data, {
         headers: {
           'apikey': supabaseAnonKey,
           'Authorization': `Bearer ${supabaseAnonKey}`,
-          'Content-Type': 'application/json',
-          'Prefer': 'return=representation'
+          'Content-Type': 'application/json'
         }
       });
 
-      const inquiry = inquiryRes.data[0];
+      const inquiry = { id: inquiryId, ...data };
 
       // Handle files if there are any
       const files = formData.getAll('files');
