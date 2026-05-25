@@ -136,7 +136,10 @@ def quote(request):
         messages.success(request, "Quote request submitted! Our engineering team will review and contact you.")
         return redirect('quote')
         
-    return render(request, 'quote.html')
+    return render(request, 'quote.html', {
+        'SUPABASE_URL': os.environ.get('REACT_APP_SUPABASE_URL') or os.environ.get('SUPABASE_URL', ''),
+        'SUPABASE_ANON_KEY': os.environ.get('REACT_APP_SUPABASE_ANON_KEY') or os.environ.get('SUPABASE_ANON_KEY', ''),
+    })
 
 def book_meeting(request):
     if request.method == 'POST':

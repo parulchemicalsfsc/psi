@@ -6,7 +6,11 @@
   <title>Press Stamping Industries — RFQ System</title>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link href="{% static 'css/main.8e058bcf.css' %}" rel="stylesheet">
-  <script defer="defer" src="{% static 'js/main.816c1c4c.js' %}?v={% now 'U' %}"></script>
+  <script>
+    window.REACT_APP_SUPABASE_URL = "{{ SUPABASE_URL|escapejs }}";
+    window.REACT_APP_SUPABASE_ANON_KEY = "{{ SUPABASE_ANON_KEY|escapejs }}";
+  </script>
+  <script defer="defer" src="{% static 'js/main.4b9980c3.js' %}?v={% now 'U' %}"></script>
 </head>
 <body>
   <div id="root"></div>

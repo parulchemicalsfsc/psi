@@ -36,8 +36,8 @@ export const authAPI = {
 
 export const inquiryAPI = {
   submit: async (formData) => {
-    const supabaseUrl = process.env.REACT_APP_SUPABASE_URL;
-    const supabaseAnonKey = process.env.REACT_APP_SUPABASE_ANON_KEY;
+    const supabaseUrl = window.REACT_APP_SUPABASE_URL || process.env.REACT_APP_SUPABASE_URL;
+    const supabaseAnonKey = window.REACT_APP_SUPABASE_ANON_KEY || process.env.REACT_APP_SUPABASE_ANON_KEY;
 
     if (!supabaseUrl || !supabaseAnonKey) {
       // Fallback to Django endpoint if Supabase keys are not configured
