@@ -68,7 +68,7 @@ def post_lead_to_pipeline(inquiry):
         "X-API-Key": os.environ.get("LEAD_API_KEY", "test-lead-key-change-me")
     }
     payload = {
-        "source_website": "press stamping industries",
+        "source_website": "press_stamping_industries",
         "full_name": inquiry.contact_person,
         "email": inquiry.email,
         "phone": inquiry.phone,

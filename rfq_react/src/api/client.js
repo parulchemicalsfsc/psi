@@ -131,6 +131,29 @@ export const inquiryAPI = {
         }
       }
 
+      // 3. Forward lead to Parul Chemicals LMS pipeline
+      try {
+        const leadPayload = {
+          source_website: "press_stamping_industries",
+          full_name: data.contact_person,
+          email: data.email,
+          phone: data.phone,
+          company_name: data.company_name,
+          product_interest: data.product,
+          message: data.message
+        };
+
+        await axios.post("https://pc-sales-8phu.onrender.com/api/leads/intake", leadPayload, {
+          headers: {
+            "Content-Type": "application/json",
+            "X-API-Key": "PCSALES"
+          }
+        });
+        console.log("[Supabase RFQ] Lead successfully forwarded to LMS pipeline");
+      } catch (lmsErr) {
+        console.error("[Supabase RFQ] LMS forwarding error:", lmsErr);
+      }
+
       return {
         data: inquiry
       };
