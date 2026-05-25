@@ -36,8 +36,15 @@ export const authAPI = {
 
 export const inquiryAPI = {
   submit: async (formData) => {
-    const supabaseUrl = window.REACT_APP_SUPABASE_URL || process.env.REACT_APP_SUPABASE_URL;
-    const supabaseAnonKey = window.REACT_APP_SUPABASE_ANON_KEY || process.env.REACT_APP_SUPABASE_ANON_KEY;
+    let supabaseUrl = window.REACT_APP_SUPABASE_URL || process.env.REACT_APP_SUPABASE_URL;
+    let supabaseAnonKey = window.REACT_APP_SUPABASE_ANON_KEY || process.env.REACT_APP_SUPABASE_ANON_KEY;
+
+    // Clean keys by removing accidental quotes and whitespace
+    if (supabaseUrl) supabaseUrl = supabaseUrl.replace(/['"]/g, '').trim();
+    if (supabaseAnonKey) supabaseAnonKey = supabaseAnonKey.replace(/['"]/g, '').trim();
+
+    console.log("[Supabase RFQ] Connecting to URL:", supabaseUrl);
+    console.log("[Supabase RFQ] Key loaded:", !!supabaseAnonKey);
 
     if (!supabaseUrl || !supabaseAnonKey) {
       // Fallback to Django endpoint if Supabase keys are not configured
