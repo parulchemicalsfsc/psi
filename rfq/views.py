@@ -93,28 +93,36 @@ def post_lead_to_pipeline(inquiry):
 @permission_classes([AllowAny])
 @parser_classes([MultiPartParser, FormParser])
 def submit_inquiry(request):
-    serializer = InquiryCreateSerializer(data=request.data)
-    if not serializer.is_valid():
-        return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+    try:
+        serializer = InquiryCreateSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response({'errors': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
 
-    inquiry = serializer.save()
+        inquiry = serializer.save()
 
-    for f in request.FILES.getlist('files'):
-        InquiryFile.objects.create(
-            inquiry=inquiry,
-            file=f,
-            original_name=f.name,
-            file_size=f.size,
-        )
+        for f in request.FILES.getlist('files'):
+            InquiryFile.objects.create(
+                inquiry=inquiry,
+                file=f,
+                original_name=f.name,
+                file_size=f.size,
+            )
 
-    # Forward lead to Parul Chemicals pipeline securely from the backend
-    post_lead_to_pipeline(inquiry)
+        # Forward lead to Parul Chemicals pipeline securely from the backend
+        post_lead_to_pipeline(inquiry)
 
-    return Response({
-        'message': 'Your inquiry has been submitted successfully.',
-        'ref_number': inquiry.ref_number,
-        'id': str(inquiry.id),
-    }, status=status.HTTP_201_CREATED)
+        return Response({
+            'message': 'Your inquiry has been submitted successfully.',
+            'ref_number': inquiry.ref_number,
+            'id': str(inquiry.id),
+        }, status=status.HTTP_201_CREATED)
+    except Exception as e:
+        import traceback
+        print("=== RFQ SUBMISSION ERROR ===")
+        traceback.print_exc()
+        return Response({
+            'errors': {'server': [str(e)]}
+        }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 # ── ADMIN: INQUIRY LIST ───────────────────────────────────────────────────────
