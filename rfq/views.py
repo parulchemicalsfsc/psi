@@ -65,7 +65,7 @@ def post_lead_to_pipeline(inquiry):
     url = "https://pc-sales-8phu.onrender.com/api/leads/intake"
     headers = {
         "Content-Type": "application/json",
-        "X-API-Key": os.environ.get("LEAD_API_KEY", "test-lead-key-change-me")
+        "X-API-Key": os.environ.get("LEAD_API_KEY", "PCSALES")
     }
     payload = {
         "source_website": "press_stamping_industries",
