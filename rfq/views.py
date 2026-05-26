@@ -259,3 +259,32 @@ def export_csv(request):
             q.delivery_time if q else '', q.payment_terms if q else '', q.notes if q else '',
         ])
     return response
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def forward_lead(request):
+    import urllib.request
+    import json
+    import os
+    
+    url = "https://pc-sales-8phu.onrender.com/api/leads/intake"
+    headers = {
+        "Content-Type": "application/json",
+        "X-API-Key": os.environ.get("LEAD_API_KEY", "PCSALES")
+    }
+    
+    try:
+        payload = request.data
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode('utf-8'),
+            headers=headers,
+            method='POST'
+        )
+        with urllib.request.urlopen(req, timeout=5) as response:
+            res_data = response.read().decode('utf-8')
+            return JsonResponse(json.loads(res_data), status=200)
+    except Exception as e:
+        print("LMS Forwarding Proxy Error:", e)
+        return JsonResponse({"error": str(e)}, status=500)

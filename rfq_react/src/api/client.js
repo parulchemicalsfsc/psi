@@ -156,13 +156,8 @@ export const inquiryAPI = {
           message: data.message
         };
 
-        await axios.post("https://pc-sales-8phu.onrender.com/api/leads/intake", leadPayload, {
-          headers: {
-            "Content-Type": "application/json",
-            "X-API-Key": "PCSALES"
-          }
-        });
-        console.log("[Supabase RFQ] Lead successfully forwarded to LMS pipeline");
+        await api.post("/leads/forward/", leadPayload);
+        console.log("[Supabase RFQ] Lead successfully forwarded to LMS pipeline (via Django proxy)");
       } catch (lmsErr) {
         console.error("[Supabase RFQ] LMS forwarding error:", lmsErr);
       }
