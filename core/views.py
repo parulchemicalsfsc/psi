@@ -76,14 +76,17 @@ def careers(request):
         resume = request.FILES.get('resume')
         message = request.POST.get('message')
         
-        JobApplication.objects.create(
-            full_name=full_name,
-            email=email,
-            phone=phone,
-            position=position,
-            resume=resume,
-            message=message
-        )
+        try:
+            JobApplication.objects.create(
+                full_name=full_name,
+                email=email,
+                phone=phone,
+                position=position,
+                resume=resume,
+                message=message
+            )
+        except Exception as e:
+            print(f"Database save failed for job application: {e}")
         
         # Send email notification
         email_subject = f"New Job Application: {position} - {full_name}"
@@ -121,15 +124,18 @@ def contact(request):
         subject = request.POST.get('subject')
         message = request.POST.get('message')
         
-        ContactSubmission.objects.create(
-            first_name=first_name,
-            last_name=last_name,
-            email=email,
-            phone=phone,
-            company=company,
-            subject=subject,
-            message=message
-        )
+        try:
+            ContactSubmission.objects.create(
+                first_name=first_name,
+                last_name=last_name,
+                email=email,
+                phone=phone,
+                company=company,
+                subject=subject,
+                message=message
+            )
+        except Exception as e:
+            print(f"Database save failed for contact submission: {e}")
         
         # Send email notification
         email_subject = f"New Contact Submission: {subject}"
@@ -169,16 +175,20 @@ def quote(request):
         blueprints = request.FILES.get('blueprints')
         estimated_volume = request.POST.get('estimated_volume')
         
-        QuoteRequest.objects.create(
-            full_name=full_name,
-            email=email,
-            phone=phone,
-            company=company,
-            industry=industry,
-            project_description=project_description,
-            blueprints=blueprints,
-            estimated_volume=estimated_volume
-        )
+        try:
+            QuoteRequest.objects.create(
+                full_name=full_name,
+                email=email,
+                phone=phone,
+                company=company,
+                industry=industry,
+                project_description=project_description,
+                blueprints=blueprints,
+                estimated_volume=estimated_volume
+            )
+        except Exception as e:
+            print(f"Database save failed for quote request: {e}")
+            
         messages.success(request, "Quote request submitted! Our engineering team will review and contact you.")
         return redirect('quote')
         
@@ -199,17 +209,20 @@ def book_meeting(request):
         time_str = request.POST.get('time')
         timezone = request.POST.get('timezone')
         
-        MeetingBooking.objects.create(
-            full_name=full_name,
-            company=company,
-            email=email,
-            phone=phone,
-            purpose=purpose,
-            notes=notes,
-            date=date_str,
-            time_slot=time_str,
-            timezone=timezone
-        )
+        try:
+            MeetingBooking.objects.create(
+                full_name=full_name,
+                company=company,
+                email=email,
+                phone=phone,
+                purpose=purpose,
+                notes=notes,
+                date=date_str,
+                time_slot=time_str,
+                timezone=timezone
+            )
+        except Exception as e:
+            print(f"Database save failed for meeting booking: {e}")
         
         # Send email notification
         email_subject = f"New Meeting Booked: {full_name} - {purpose}"
