@@ -5,6 +5,7 @@ from .models import BlogPost, GalleryItem, ContactSubmission, MeetingBooking, Qu
 import os
 import pandas as pd
 from django.conf import settings
+from django.core.mail import send_mail
 
 def home(request):
     posts = BlogPost.objects.filter(is_published=True)[:3]
@@ -83,6 +84,28 @@ def careers(request):
             resume=resume,
             message=message
         )
+        
+        # Send email notification
+        email_subject = f"New Job Application: {position} - {full_name}"
+        email_body = (
+            f"New job application received on Press Stamping Industries website.\n\n"
+            f"Name: {full_name}\n"
+            f"Email: {email}\n"
+            f"Phone: {phone or 'N/A'}\n"
+            f"Position: {position}\n"
+            f"Message: {message or 'N/A'}\n"
+        )
+        try:
+            send_mail(
+                email_subject,
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_RECEIVER_EMAIL],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print(f"Error sending job application email: {e}")
+
         messages.success(request, "Your application has been submitted successfully!")
         return redirect('careers')
         
@@ -107,6 +130,29 @@ def contact(request):
             subject=subject,
             message=message
         )
+        
+        # Send email notification
+        email_subject = f"New Contact Submission: {subject}"
+        email_body = (
+            f"You have received a new message from the contact form.\n\n"
+            f"Name: {first_name} {last_name}\n"
+            f"Email: {email}\n"
+            f"Phone: {phone or 'N/A'}\n"
+            f"Company: {company or 'N/A'}\n"
+            f"Subject: {subject}\n"
+            f"Message:\n{message}\n"
+        )
+        try:
+            send_mail(
+                email_subject,
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_RECEIVER_EMAIL],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print(f"Error sending contact email: {e}")
+
         messages.success(request, "Thank you! Your message has been sent. We will get back to you soon.")
         return redirect('contact')
         
@@ -164,6 +210,31 @@ def book_meeting(request):
             time_slot=time_str,
             timezone=timezone
         )
+        
+        # Send email notification
+        email_subject = f"New Meeting Booked: {full_name} - {purpose}"
+        email_body = (
+            f"A virtual meeting has been scheduled via the website.\n\n"
+            f"Name: {full_name}\n"
+            f"Company: {company}\n"
+            f"Email: {email}\n"
+            f"Phone: {phone or 'N/A'}\n"
+            f"Purpose: {purpose}\n"
+            f"Date: {date_str}\n"
+            f"Time Slot: {time_str} ({timezone})\n"
+            f"Additional Notes: {notes or 'N/A'}\n"
+        )
+        try:
+            send_mail(
+                email_subject,
+                email_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [settings.CONTACT_RECEIVER_EMAIL],
+                fail_silently=False,
+            )
+        except Exception as e:
+            print(f"Error sending meeting booking email: {e}")
+
         messages.success(request, f"Meeting confirmed for {date_str} at {time_str} ({timezone}). Check your email for details.")
         return redirect('contact')
     return redirect('contact')

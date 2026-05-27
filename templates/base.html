@@ -118,6 +118,30 @@
   </nav>
 </div>
 
+{% if messages %}
+  <div class="django-messages-container" style="max-width:1280px;margin:24px auto 0;padding:0 24px;">
+    {% for message in messages %}
+      <div class="django-message {{ message.tags }}" style="padding:16px 20px;margin-bottom:12px;border-radius:4px;font-family:var(--font-display);font-size:14px;font-weight:500;display:flex;align-items:center;justify-content:space-between;animation:slideDown 0.3s ease;
+        {% if message.tags == 'success' %}
+          background-color:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;
+        {% elif message.tags == 'error' or message.tags == 'danger' %}
+          background-color:#fef2f2;color:#dc2626;border:1px solid #fecaca;
+        {% else %}
+          background-color:#f0f9ff;color:#0284c7;border:1px solid #bae6fd;
+        {% endif %}">
+        <span>{{ message.message }}</span>
+        <button onclick="this.parentElement.remove()" style="background:none;border:none;color:inherit;font-size:18px;cursor:pointer;margin-left:auto;line-height:1;">&times;</button>
+      </div>
+    {% endfor %}
+  </div>
+  <style>
+    @keyframes slideDown {
+      from { transform: translateY(-10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+  </style>
+{% endif %}
+
 <main>
     {% block content %}{% endblock %}
 </main>
@@ -178,30 +202,6 @@
 
   <!-- Scripts -->
   <script src="{% static 'js/script.js' %}"></script>
-  
-  <!-- EmailJS SDK -->
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script type="text/javascript">
-    (function() {
-      // Global config object for script.js to use
-      window.EMAILJS_CONFIG = {
-        serviceID: "{{ EMAILJS_SERVICE_ID|default:'' }}",
-        publicKey: "{{ EMAILJS_PUBLIC_KEY|default:'' }}",
-        templates: {
-          contact: "{{ EMAILJS_CONTACT_TEMPLATE_ID|default:'template_contact' }}",
-          meeting: "{{ EMAILJS_MEETING_TEMPLATE_ID|default:'template_meeting' }}",
-          quote: "template_quote",
-          careers: "template_careers"
-        }
-      };
-
-      if (window.EMAILJS_CONFIG.publicKey) {
-        emailjs.init({
-          publicKey: window.EMAILJS_CONFIG.publicKey,
-        });
-      }
-    })();
-  </script>
 {% block extra_js %}{% endblock %}
 </body>
 </html>

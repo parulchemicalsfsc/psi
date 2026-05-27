@@ -181,11 +181,15 @@ else:
     # For Excel reading in core/views.py
     EXCEL_PATH = BASE_DIR / 'static' / 'images' / 'updated client list.xlsx'
 
-# EmailJS Configuration
-EMAILJS_SERVICE_ID = env('EMAILJS_SERVICE_ID', default='')
-EMAILJS_PUBLIC_KEY = env('EMAILJS_PUBLIC_KEY', default='')
-EMAILJS_CONTACT_TEMPLATE_ID = env('EMAILJS_CONTACT_TEMPLATE_ID', default='')
-EMAILJS_MEETING_TEMPLATE_ID = env('EMAILJS_MEETING_TEMPLATE_ID', default='')
+# Email Server Settings
+EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')
+EMAIL_HOST = env('EMAIL_HOST', default='smtp.gmail.com')
+EMAIL_PORT = env.int('EMAIL_PORT', default=587)
+EMAIL_USE_TLS = env.bool('EMAIL_USE_TLS', default=True)
+EMAIL_HOST_USER = env('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD', default='')
+DEFAULT_FROM_EMAIL = env('DEFAULT_FROM_EMAIL', default='webmaster@pressstampingindustries.com')
+CONTACT_RECEIVER_EMAIL = env('CONTACT_RECEIVER_EMAIL', default='info@pressstampingindustries.com')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
