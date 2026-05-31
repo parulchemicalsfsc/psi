@@ -1,18 +1,29 @@
-{% load static %}<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Press Stamping Industries — RFQ System</title>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Press Stamping Industries — RFQ System{% endblock %}
+
+{% block extra_css %}
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link href="{% static 'css/main.8e058bcf.css' %}" rel="stylesheet">
+  <link href="{% static 'css/main.3c591782.css' %}" rel="stylesheet">
+  <style>
+    /* Scoping and styling adjustments to seamlessly merge React UI with global layout */
+    #root {
+      background-color: var(--cream);
+      padding: 60px 0;
+      min-height: 70vh;
+    }
+  </style>
+{% endblock %}
+
+{% block content %}
+  <div id="root"></div>
+{% endblock %}
+
+{% block extra_js %}
   <script>
     window.REACT_APP_SUPABASE_URL = "{{ SUPABASE_URL|escapejs }}";
     window.REACT_APP_SUPABASE_ANON_KEY = "{{ SUPABASE_ANON_KEY|escapejs }}";
   </script>
-  <script defer="defer" src="{% static 'js/main.36cdf7c5.js' %}?v={% now 'U' %}"></script>
-</head>
-<body>
-  <div id="root"></div>
-</body>
-</html>
+  <script defer="defer" src="{% static 'js/main.cf53825a.js' %}?v={% now 'U' %}"></script>
+{% endblock %}

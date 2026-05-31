@@ -272,3 +272,18 @@ def paint_shop(request):
 
 def measuring(request):
     return render(request, 'shops/measuring.html')
+
+from django.http import JsonResponse
+def booked_slots(request):
+    try:
+        bookings = MeetingBooking.objects.all()
+        booking_dict = {}
+        for b in bookings:
+            date_str = b.date.strftime('%Y-%m-%d')
+            if date_str not in booking_dict:
+                booking_dict[date_str] = []
+            booking_dict[date_str].append(b.time_slot)
+        return JsonResponse(booking_dict)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
+

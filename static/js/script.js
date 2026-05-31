@@ -38,21 +38,54 @@ function switchContactTab(tab){
 }
 
 // ── CALENDAR ──
-let curYear=2026,curMonth=3,selectedDate=null,selectedSlot=null;
+const todayDate = new Date();
+let curYear = todayDate.getFullYear();
+let curMonth = todayDate.getMonth();
+let selectedDate = null;
+let selectedSlot = null;
+let bookedSlotsData = {};
+
 const monthNames=['January','February','March','April','May','June','July','August','September','October','November','December'];
-// "unavailable" days (0=Sun,6=Sat and specific dates)
+
+// Fetch bookings from Django
+function fetchBookings() {
+  return fetch('/api/booked-slots/')
+    .then(r => r.json())
+    .then(data => {
+      bookedSlotsData = data;
+      renderCalendar();
+    })
+    .catch(err => {
+      console.error("Failed to fetch bookings:", err);
+      renderCalendar();
+    });
+}
+
+// "unavailable" days (0=Sun is off, others are available unless fully booked)
 function isAvailable(year,month,day){
   const d=new Date(year,month,day);
   const dow=d.getDay();
-  if(dow===0||dow===6)return false;
-  // simulate some unavailable dates
-  const blocked=[3,7,14,21,22];
-  if(blocked.includes(day))return false;
-  // past dates
-  const today=new Date(2026,3,17);
-  if(d<today)return false;
+  if(dow===0) return false; // Sunday is off
+  
+  // Past dates relative to today's real date
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  if(d<today) return false;
+  
+  // Check if all slots are booked for this day
+  const m = String(month + 1).padStart(2, '0');
+  const dayStr = String(day).padStart(2, '0');
+  const dateKey = `${year}-${m}-${dayStr}`;
+  if (bookedSlotsData && bookedSlotsData[dateKey]) {
+    const bookedForDay = bookedSlotsData[dateKey];
+    if (bookedForDay.length >= allSlots.length) {
+      return false; // fully booked day -> dull
+    }
+  }
+  
   return true;
 }
+
 function renderCalendar(){
   const grid=document.getElementById('calGrid');
   if(!grid)return;
@@ -65,7 +98,7 @@ function renderCalendar(){
   const lastDay=new Date(curYear,curMonth+1,0).getDate();
   for(let d=1;d<=lastDay;d++){
     const avail=isAvailable(curYear,curMonth,d);
-    const isToday=(d===17&&curMonth===3&&curYear===2026);
+    const isToday=(d===todayDate.getDate()&&curMonth===todayDate.getMonth()&&curYear===todayDate.getFullYear());
     const isSel=(selectedDate&&selectedDate.d===d&&selectedDate.m===curMonth&&selectedDate.y===curYear);
     const cls=`cal-day ${avail?'available':'unavailable'}${isSel?' selected':''}${isToday?' today-mark':''}`;
     if(avail) html+=`<div class="${cls}" onclick="selectDate(${d})">${d}</div>`;
@@ -98,13 +131,22 @@ function changeMonth(dir){
 
 // ── TIME SLOTS ──
 const allSlots=['9:00 AM','9:30 AM','10:00 AM','10:30 AM','11:00 AM','11:30 AM','2:00 PM','2:30 PM','3:00 PM','3:30 PM','4:00 PM','4:30 PM','5:00 PM'];
-const bookedSlots=['10:00 AM','2:30 PM','4:00 PM']; // simulate booked
+
 function renderSlots(){
   const grid=document.getElementById('slotsGrid');
   if(!grid)return;
   const tz=document.getElementById('tzSelect')?.value||'IST';
+  
+  let bookedForSelectedDay = [];
+  if (selectedDate) {
+    const m = String(selectedDate.m + 1).padStart(2, '0');
+    const dVal = String(selectedDate.d).padStart(2, '0');
+    const dateKey = `${selectedDate.y}-${m}-${dVal}`;
+    bookedForSelectedDay = bookedSlotsData[dateKey] || [];
+  }
+
   grid.innerHTML=allSlots.map(s=>{
-    const avail=!bookedSlots.includes(s);
+    const avail=!bookedForSelectedDay.includes(s);
     const isSel=(selectedSlot===s);
     return`<div class="slot-btn ${avail?(isSel?'selected':'avail'):'unavail'}" ${avail?`onclick="selectSlot('${s}')"`:''}>${s}<br><span style="font-size:10px;opacity:.6">${tz}</span></div>`;
   }).join('');
@@ -211,6 +253,7 @@ document.addEventListener('keydown', (e) => {
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded',()=>{
-  renderCalendar();
+  if (typeof fetchBookings === 'function') fetchBookings();
+  else renderCalendar();
   initReveal();
 });

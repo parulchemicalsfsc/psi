@@ -46,13 +46,15 @@ export default function App() {
 
   return (
     <div>
-      <Navbar
-        page={page}
-        setPage={handleSetPage}
-        isAdmin={isAdmin}
-        setIsAdmin={setIsAdmin}
-        username={username}
-      />
+      {isAdmin && (
+        <Navbar
+          page={page}
+          setPage={handleSetPage}
+          isAdmin={isAdmin}
+          setIsAdmin={setIsAdmin}
+          username={username}
+        />
+      )}
 
       {page === 'inquiry'   && <InquiryForm />}
       {page === 'login'     && <Login onLogin={handleLogin} />}

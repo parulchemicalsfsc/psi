@@ -55,12 +55,7 @@ export default function Navbar({ page, setPage, isAdmin, setIsAdmin, username })
               color: 'rgba(255,255,255,.7)', cursor: 'pointer', fontSize: '13px',
             }}>Logout</button>
           </div>
-        ) : (
-          <button onClick={() => setPage('login')} style={{
-            padding: '.4rem 1rem', borderRadius: 'var(--rs)', background: 'var(--amber)',
-            color: '#fff', border: 'none', fontWeight: 500, cursor: 'pointer', fontSize: '13.5px',
-          }}>Admin Login</button>
-        )}
+        ) : null}
       </div>
     </nav>
   );
