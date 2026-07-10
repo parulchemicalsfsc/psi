@@ -114,22 +114,11 @@ WSGI_APPLICATION = 'psi_site.wsgi.application'
 db_url = env('DATABASE_URL', default=None) or env('POSTGRES_URL', default=None)
 
 if db_url:
-    # Parse the URL manually to use pg8000 (pure Python) instead of psycopg2
-    import urllib.parse
-    parsed = urllib.parse.urlparse(db_url)
     DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': parsed.path.lstrip('/'),
-            'USER': parsed.username,
-            'PASSWORD': parsed.password,
-            'HOST': parsed.hostname,
-            'PORT': parsed.port or 5432,
-            'OPTIONS': {
-                'driver': 'pg8000',
-            },
-        }
+        'default': env.db(db_url),
     }
+    # Use psycopg (v3) - smaller than psycopg2-binary, supports pure Python
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
 else:
     DATABASES = {
         'default': {
