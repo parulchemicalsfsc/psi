@@ -164,3 +164,4 @@ Thumbs.db
 rfq_react/node_modules/
 rfq_react/build/
 rfq_react/.cache/
+.vercel
