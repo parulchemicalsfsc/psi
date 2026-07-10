@@ -278,6 +278,9 @@ def measuring(request):
 
 from django.http import JsonResponse
 from django.utils import timezone
+import logging
+logger = logging.getLogger(__name__)
+
 def booked_slots(request):
     try:
         bookings = MeetingBooking.objects.filter(
@@ -289,5 +292,6 @@ def booked_slots(request):
             booking_dict.setdefault(date_str, []).append(b['time_slot'])
         return JsonResponse(booking_dict)
     except Exception as e:
+        logger.error(f"booked_slots error: {e}", exc_info=True)
         return JsonResponse({'error': str(e)}, status=500)
 
