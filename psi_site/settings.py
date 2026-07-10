@@ -57,12 +57,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'storages',
     'rest_framework',
     'corsheaders',
     'core',
     'rfq',
 ]
+
+# Add storages only if available (not on Vercel serverless)
+try:
+    import storages  # noqa: F401
+    INSTALLED_APPS.insert(5, 'storages')
+except ImportError:
+    pass
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -171,17 +177,24 @@ if not DEBUG:
 USE_AWS = env.bool('USE_AWS', default=False)
 
 if USE_AWS:
-    AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
-    AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME', default='ap-south-1')
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_DEFAULT_ACL = None
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    
-    # Media files
-    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    try:
+        import storages  # noqa: F401
+        AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+        AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+        AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME', default='ap-south-1')
+        AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+        AWS_DEFAULT_ACL = None
+        AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+        
+        # Media files
+        DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+        MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/media/'
+    except ImportError:
+        # storages/boto3 not installed (Vercel serverless)
+        USE_AWS = False
+        MEDIA_URL = '/media/'
+        MEDIA_ROOT = BASE_DIR / 'media'
 else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
