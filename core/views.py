@@ -6,23 +6,19 @@ import os
 import pandas as pd
 from django.conf import settings
 from django.core.mail import send_mail
+from django.core.cache import cache
 
-def home(request):
-    posts = BlogPost.objects.filter(is_published=True)[:3]
-    
-    # Read clients from Excel
+def _parse_clients_excel():
     clients = []
     excel_path = os.path.join(settings.BASE_DIR, 'updated-client-list.xlsx')
     try:
         if os.path.exists(excel_path):
             df = pd.read_excel(excel_path)
-            # Find columns
             client_col = next((col for col in df.columns if 'client' in col.lower()), df.columns[1])
             since_col = next((col for col in df.columns if 'since' in col.lower()), df.columns[3])
             ind_col = next((col for col in df.columns if 'ind' in col.lower()), df.columns[4])
             website_col = next((col for col in df.columns if 'website' in col.lower()), None)
             
-            # Create list of dicts
             for _, row in df.iterrows():
                 name = str(row[client_col]).strip()
                 if 'no client' in name.lower() or not name.strip() or name.lower() == 'nan':
@@ -43,10 +39,17 @@ def home(request):
                 })
     except Exception as e:
         print(f"Error reading excel: {e}")
-        
+    return clients
+
+def home(request):
+    posts = BlogPost.objects.filter(is_published=True)[:3]
+    clients = cache.get('homepage_clients')
+    if clients is None:
+        clients = _parse_clients_excel()
+        cache.set('homepage_clients', clients, 3600)
     return render(request, 'index.html', {
         'posts': posts,
-        'clients': clients # Pass all clients
+        'clients': clients
     })
 
 def about(request):
@@ -104,7 +107,7 @@ def careers(request):
                 email_body,
                 settings.DEFAULT_FROM_EMAIL,
                 [settings.CONTACT_RECEIVER_EMAIL],
-                fail_silently=False,
+                fail_silently=True,
             )
         except Exception as e:
             print(f"Error sending job application email: {e}")
@@ -154,7 +157,7 @@ def contact(request):
                 email_body,
                 settings.DEFAULT_FROM_EMAIL,
                 [settings.CONTACT_RECEIVER_EMAIL],
-                fail_silently=False,
+                fail_silently=True,
             )
         except Exception as e:
             print(f"Error sending contact email: {e}")
@@ -243,7 +246,7 @@ def book_meeting(request):
                 email_body,
                 settings.DEFAULT_FROM_EMAIL,
                 [settings.CONTACT_RECEIVER_EMAIL],
-                fail_silently=False,
+                fail_silently=True,
             )
         except Exception as e:
             print(f"Error sending meeting booking email: {e}")
@@ -274,15 +277,16 @@ def measuring(request):
     return render(request, 'shops/measuring.html')
 
 from django.http import JsonResponse
+from django.utils import timezone
 def booked_slots(request):
     try:
-        bookings = MeetingBooking.objects.all()
+        bookings = MeetingBooking.objects.filter(
+            date__gte=timezone.now().date()
+        ).order_by('date').values('date', 'time_slot')[:500]
         booking_dict = {}
         for b in bookings:
-            date_str = b.date.strftime('%Y-%m-%d')
-            if date_str not in booking_dict:
-                booking_dict[date_str] = []
-            booking_dict[date_str].append(b.time_slot)
+            date_str = b['date'].strftime('%Y-%m-%d')
+            booking_dict.setdefault(date_str, []).append(b['time_slot'])
         return JsonResponse(booking_dict)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)

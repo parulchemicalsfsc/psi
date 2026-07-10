@@ -1,4 +1,6 @@
 import csv
+import concurrent.futures
+from concurrent.futures import ThreadPoolExecutor
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponse, JsonResponse
 from django.db.models import Q, Count
@@ -11,12 +13,20 @@ from rest_framework.decorators import api_view, permission_classes, parser_class
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.response import Response
 from rest_framework.parsers import MultiPartParser, FormParser
+from rest_framework.pagination import PageNumberPagination
 
 from .models import Inquiry, InquiryFile, Quotation
 from .serializers import (
     InquiryListSerializer, InquiryDetailSerializer,
     InquiryCreateSerializer, QuotationSerializer,
 )
+
+_executor = ThreadPoolExecutor(max_workers=2)
+
+class SmallPagination(PageNumberPagination):
+    page_size = 25
+    page_size_query_param = 'page_size'
+    max_page_size = 100
 
 
 # ── CSRF TOKEN ENDPOINT ───────────────────────────────────────────────────────
@@ -54,6 +64,9 @@ def auth_status(request):
         'authenticated': request.user.is_authenticated and request.user.is_staff,
         'username': request.user.username if request.user.is_authenticated else None,
     })
+
+
+_executor = ThreadPoolExecutor(max_workers=2)
 
 
 # ── CUSTOMER: SUBMIT INQUIRY ──────────────────────────────────────────────────
@@ -108,8 +121,8 @@ def submit_inquiry(request):
                 file_size=f.size,
             )
 
-        # Forward lead to Parul Chemicals pipeline securely from the backend
-        post_lead_to_pipeline(inquiry)
+        # Forward lead to Parul Chemicals pipeline - FIRE AND FORGET
+        _executor.submit(post_lead_to_pipeline, inquiry)
 
         return Response({
             'message': 'Your inquiry has been submitted successfully.',
@@ -148,7 +161,9 @@ def inquiry_list(request):
     if sort in ['created_at', '-created_at', 'company_name', '-company_name']:
         qs = qs.order_by(sort)
 
-    return Response({'count': qs.count(), 'results': InquiryListSerializer(qs, many=True).data})
+    paginator = SmallPagination()
+    page = paginator.paginate_queryset(qs, request)
+    return paginator.get_paginated_response(InquiryListSerializer(page, many=True).data)
 
 
 # ── ADMIN: INQUIRY DETAIL ─────────────────────────────────────────────────────

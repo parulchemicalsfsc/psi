@@ -16,7 +16,7 @@ import environ
 
 # Initialize environment variables
 env = environ.Env(
-    DEBUG=(bool, True)
+    DEBUG=(bool, False)
 )
 # Read .env file if it exists
 environ.Env.read_env(os.path.join(Path(__file__).resolve().parent.parent, '.env'))
@@ -117,6 +117,8 @@ else:
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
+
+DATABASES['default']['CONN_MAX_AGE'] = env.int('CONN_MAX_AGE', default=60)
 
 
 # Password validation
