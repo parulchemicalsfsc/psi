@@ -2,6 +2,6 @@ django
 Pillow
 django-environ
 whitenoise
-psycopg2-binary
+pg8000
 djangorestframework
 django-cors-headers
