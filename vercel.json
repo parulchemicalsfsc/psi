@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pip install -r requirements-build.txt && python build_clients_json.py && pip uninstall -y pandas openpyxl numpy && pip install -r requirements.txt && python manage.py collectstatic --noinput",
+  "buildCommand": "pip install -r requirements.txt && python manage.py collectstatic --noinput",
   "devCommand": "python manage.py runserver",
   "installCommand": "pip install -r requirements.txt",
   "framework": "django"
