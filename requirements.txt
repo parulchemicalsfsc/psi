@@ -6,7 +6,5 @@ django-storages
 boto3
 gunicorn
 psycopg2-binary
-pandas
-openpyxl
 djangorestframework
 django-cors-headers

@@ -3,49 +3,26 @@ from django.contrib import messages
 from .models import BlogPost, GalleryItem, ContactSubmission, MeetingBooking, QuoteRequest, JobApplication
 
 import os
-import pandas as pd
+import json
 from django.conf import settings
 from django.core.mail import send_mail
 from django.core.cache import cache
 
-def _parse_clients_excel():
-    clients = []
-    excel_path = os.path.join(settings.BASE_DIR, 'updated-client-list.xlsx')
+def _load_clients_json():
+    json_path = os.path.join(settings.BASE_DIR, 'static', 'clients.json')
     try:
-        if os.path.exists(excel_path):
-            df = pd.read_excel(excel_path)
-            client_col = next((col for col in df.columns if 'client' in col.lower()), df.columns[1])
-            since_col = next((col for col in df.columns if 'since' in col.lower()), df.columns[3])
-            ind_col = next((col for col in df.columns if 'ind' in col.lower()), df.columns[4])
-            website_col = next((col for col in df.columns if 'website' in col.lower()), None)
-            
-            for _, row in df.iterrows():
-                name = str(row[client_col]).strip()
-                if 'no client' in name.lower() or not name.strip() or name.lower() == 'nan':
-                    continue
-                    
-                logo_filename = name.lower().replace(' ', '_').replace('.', '').replace('/', '_') + '.png'
-                website = str(row[website_col]).strip() if website_col and pd.notna(row[website_col]) else '#'
-                if website != '#' and not (website.startswith('http://') or website.startswith('https://')):
-                    website = 'https://' + website
-
-                clients.append({
-                    'name': name,
-                    'short': "".join([w[0] for w in name.split() if w[0].isupper()]) or name[:2].upper(),
-                    'industry': row[ind_col],
-                    'since': row[since_col],
-                    'website': website,
-                    'logo': f'images/logos/{logo_filename}'
-                })
+        if os.path.exists(json_path):
+            with open(json_path, 'r') as f:
+                return json.load(f)
     except Exception as e:
-        print(f"Error reading excel: {e}")
-    return clients
+        print(f"Error loading clients.json: {e}")
+    return []
 
 def home(request):
     posts = BlogPost.objects.filter(is_published=True)[:3]
     clients = cache.get('homepage_clients')
     if clients is None:
-        clients = _parse_clients_excel()
+        clients = _load_clients_json()
         cache.set('homepage_clients', clients, 3600)
     return render(request, 'index.html', {
         'posts': posts,
