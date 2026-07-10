@@ -122,7 +122,6 @@ if db_url_var:
         'default': env.db(db_url_var),
     }
     # Use pg8000 (pure Python) instead of psycopg2 to reduce bundle size
-    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
     DATABASES['default']['OPTIONS'] = {'driver': 'pg8000'}
 else:
     DATABASES = {
