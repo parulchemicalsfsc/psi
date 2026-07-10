@@ -111,11 +111,15 @@ WSGI_APPLICATION = 'psi_site.wsgi.application'
 # https://docs.djangoproject.com/en/6.0/ref/settings/#databases
 
 # Database configuration
-db_url = env('DATABASE_URL', default=None) or env('POSTGRES_URL', default=None)
-
-if db_url:
+if env('DATABASE_URL', default=None):
     DATABASES = {
-        'default': env.db(db_url),
+        'default': env.db('DATABASE_URL'),
+    }
+    # Use psycopg (v3) - smaller than psycopg2-binary, supports pure Python
+    DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
+elif env('POSTGRES_URL', default=None):
+    DATABASES = {
+        'default': env.db('POSTGRES_URL'),
     }
     # Use psycopg (v3) - smaller than psycopg2-binary, supports pure Python
     DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql'
