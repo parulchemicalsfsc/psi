@@ -201,7 +201,9 @@ else:
     MEDIA_URL = '/media/'
     MEDIA_ROOT = BASE_DIR / 'media'
     # For Excel reading in core/views.py
-    EXCEL_PATH = BASE_DIR / 'static' / 'images' / 'updated client list.xlsx'
+    _excel_static = BASE_DIR / 'static' / 'images' / 'updated client list.xlsx'
+    _excel_staticfiles = BASE_DIR / 'staticfiles' / 'images' / 'updated client list.xlsx'
+    EXCEL_PATH = _excel_staticfiles if _excel_staticfiles.exists() else _excel_static
 
 # Email Server Settings
 EMAIL_BACKEND = env('EMAIL_BACKEND', default='django.core.mail.backends.smtp.EmailBackend')

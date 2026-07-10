@@ -1,0 +1,7 @@
+.git
+.venv
+venv
+env
+media
+rfq_react
+db.sqlite3
