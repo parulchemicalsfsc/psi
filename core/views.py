@@ -4,9 +4,30 @@ from .models import BlogPost, GalleryItem, ContactSubmission, MeetingBooking, Qu
 
 import os
 import json
+import urllib.request
 from django.conf import settings
 from django.core.mail import send_mail
 from django.core.cache import cache
+
+def _post_lead_to_pipeline(payload):
+    url = "https://pc-sales-8phu.onrender.com/api/leads/intake"
+    headers = {
+        "Content-Type": "application/json",
+        "X-API-Key": os.environ.get("LEAD_API_KEY", "PCSALES")
+    }
+    try:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(payload).encode('utf-8'),
+            headers=headers,
+            method='POST'
+        )
+        with urllib.request.urlopen(req, timeout=5) as response:
+            return response.read().decode('utf-8')
+    except Exception as e:
+        print(f"Error posting lead to pipeline: {e}")
+        return None
+
 
 def _load_clients_json():
     json_path = os.path.join(settings.BASE_DIR, 'static', 'clients.json')
@@ -116,6 +137,19 @@ def contact(request):
             )
         except Exception as e:
             print(f"Database save failed for contact submission: {e}")
+
+        # Send to Lead Management API
+        lead_payload = {
+            "source_website": "press_stamping_industries",
+            "full_name": f"{first_name} {last_name}".strip(),
+            "email": email,
+            "phone": phone or "",
+            "company_name": company or "",
+            "product_interest": subject or "",
+            "message": message or ""
+        }
+        _post_lead_to_pipeline(lead_payload)
+
         
         # Send email notification
         email_subject = f"New Contact Submission: {subject}"
@@ -203,6 +237,19 @@ def book_meeting(request):
             )
         except Exception as e:
             print(f"Database save failed for meeting booking: {e}")
+
+        # Send to Lead Management API
+        lead_payload = {
+            "source_website": "press_stamping_industries",
+            "full_name": full_name,
+            "email": email,
+            "phone": phone or "",
+            "company_name": company or "",
+            "product_interest": purpose or "",
+            "message": f"Meeting scheduled for {date_str} at {time_str} ({timezone}). Notes: {notes or ''}"
+        }
+        _post_lead_to_pipeline(lead_payload)
+
         
         # Send email notification
         email_subject = f"New Meeting Booked: {full_name} - {purpose}"
