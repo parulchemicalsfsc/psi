@@ -68,7 +68,7 @@ export default function AdminPanel() {
   }
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
+    <div className="mobile-pad" style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
       <div style={{ marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '20px', fontWeight: 600, color: 'var(--steel)' }}>Inquiry Management</h2>
         <p style={{ fontSize: '13.5px', color: 'var(--text-3)', marginTop: '3px' }}>View, filter and manage all incoming customer RFQs</p>

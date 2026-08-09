@@ -32,21 +32,21 @@ export default function Navbar({ page, setPage, isAdmin, setIsAdmin, username })
   }
 
   return (
-    <nav style={styles.nav}>
+    <nav style={styles.nav} className="mobile-nav">
       <a style={styles.brand} href="#">
         <div style={styles.mark}>⚙</div>
         Press Stamping Industries
       </a>
 
-      <div style={styles.tabs}>
+      <div style={styles.tabs} className="mobile-tabs">
         <NavTab label="New Inquiry" active={page === 'inquiry'} onClick={() => setPage('inquiry')} />
         {isAdmin && <NavTab label="Admin Panel"  active={page === 'admin'}     onClick={() => setPage('admin')} />}
         {isAdmin && <NavTab label="Dashboard"    active={page === 'dashboard'} onClick={() => setPage('dashboard')} />}
       </div>
 
-      <div>
+      <div style={{ width: '100%' }}>
         {isAdmin ? (
-          <div style={styles.userRow}>
+          <div style={styles.userRow} className="mobile-user">
             <div style={styles.avatar}>A</div>
             <span>{username || 'Admin'}</span>
             <button onClick={handleLogout} style={{

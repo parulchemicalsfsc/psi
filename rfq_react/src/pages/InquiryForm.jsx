@@ -12,7 +12,6 @@ const field = (label, el) => (
 );
 
 const inputStyle = { padding: '.6rem .85rem', border: '1px solid var(--border)', borderRadius: 'var(--rs)', fontSize: '14px', color: 'var(--text)', background: '#fff', outline: 'none', width: '100%' };
-const grid2 = { display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' };
 
 export default function InquiryForm() {
   const [form, setForm] = useState({ company_name:'', contact_person:'', phone:'', email:'', product:'', quantity:'', material:'', target_delivery:'', message:'' });
@@ -54,7 +53,7 @@ export default function InquiryForm() {
   }
 
   return (
-    <div style={{ maxWidth: '760px', margin: '0 auto', padding: '2rem' }}>
+    <div className="mobile-pad" style={{ maxWidth: '760px', margin: '0 auto', padding: '2rem' }}>
       <div style={{ marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '20px', fontWeight: 600, color: 'var(--steel)' }}>Request for Quotation</h2>
         <p style={{ fontSize: '13.5px', color: 'var(--text-3)', marginTop: '3px' }}>Fill in your inquiry details. Our team will respond within 24 business hours.</p>
@@ -72,22 +71,22 @@ export default function InquiryForm() {
         </div>
 
         <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.6px', color: 'var(--text-3)', marginBottom: '.75rem' }}>Company Information</div>
-        <div style={grid2}>
+        <div className="grid-2">
           {field('Company Name *', <input style={inputStyle} value={form.company_name} onChange={set('company_name')} placeholder="e.g. Tata Steel Ltd." />)}
           {field('Contact Person *', <input style={inputStyle} value={form.contact_person} onChange={set('contact_person')} placeholder="Full name" />)}
         </div>
-        <div style={grid2}>
+        <div className="grid-2">
           {field('Phone Number *', <input style={inputStyle} value={form.phone} onChange={set('phone')} placeholder="+91 98765 43210" type="tel" />)}
           {field('Email Address *', <input style={inputStyle} value={form.email} onChange={set('email')} placeholder="contact@company.com" type="email" />)}
         </div>
 
         <hr style={{ border: 'none', borderTop: '1px solid var(--border)', margin: '1.5rem 0' }} />
         <div style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.6px', color: 'var(--text-3)', marginBottom: '.75rem' }}>Product Details</div>
-        <div style={grid2}>
+        <div className="grid-2">
           {field('Product / Part Name *', <input style={inputStyle} value={form.product} onChange={set('product')} placeholder="e.g. Stamped Bracket" />)}
           {field('Quantity Required *', <input style={inputStyle} value={form.quantity} onChange={set('quantity')} placeholder="e.g. 5000" type="number" min="1" />)}
         </div>
-        <div style={grid2}>
+        <div className="grid-2">
           {field('Material', (
             <select style={{ ...inputStyle, background: '#fff' }} value={form.material} onChange={set('material')}>
               <option value="">Select material</option>

@@ -62,7 +62,41 @@ input, select, textarea, button {
   from { opacity: 0; transform: translateY(-4px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes slideUp {
   from { transform: translateY(12px); opacity: 0; }
   to   { transform: translateY(0); opacity: 1; }
+}
+
+/* Mobile Responsive Utilities */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+
+@media (max-width: 768px) {
+  .mobile-nav {
+    height: auto !important;
+    padding: 1rem !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
+  }
+  .mobile-tabs {
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 5px;
+    justify-content: flex-start;
+  }
+  .mobile-user {
+    width: 100%;
+    justify-content: space-between !important;
+  }
+  .grid-2, .grid-4 {
+    grid-template-columns: 1fr !important;
+  }
+  .mobile-pad {
+    padding: 1rem !important;
+  }
+  .mobile-col {
+    grid-template-columns: 1fr !important;
+  }
 }

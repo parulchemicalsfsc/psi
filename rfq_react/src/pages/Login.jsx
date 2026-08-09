@@ -22,8 +22,8 @@ export default function Login({ onLogin }) {
   const inputStyle = { width: '100%', padding: '.6rem .85rem', border: '1px solid var(--border)', borderRadius: 'var(--rs)', fontSize: '14px', outline: 'none', marginTop: '5px' };
 
   return (
-    <div style={{ minHeight: 'calc(100vh - 60px)', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--steel)' }}>
-      <div style={{ background: '#fff', borderRadius: '16px', padding: '3rem 2.5rem', width: '100%', maxWidth: '400px', boxShadow: 'var(--shm)' }}>
+    <div className="mobile-pad" style={{ minHeight: 'calc(100vh - 60px)', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'var(--steel)' }}>
+      <div className="mobile-pad" style={{ background: '#fff', borderRadius: '16px', padding: '3rem 2.5rem', width: '100%', maxWidth: '400px', boxShadow: 'var(--shm)' }}>
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ width: '56px', height: '56px', background: 'var(--steel)', color: '#fff', borderRadius: '14px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '28px', margin: '0 auto 1rem' }}>⚙</div>
           <h1 style={{ fontSize: '20px', fontWeight: 600, color: 'var(--steel)' }}>Admin Portal</h1>

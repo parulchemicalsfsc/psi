@@ -62,7 +62,7 @@ export default function Dashboard() {
   const th = { padding: '.6rem 1rem', textAlign: 'left', fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '.6px', color: 'var(--text-3)', borderBottom: '1px solid var(--border)', background: 'var(--surface)' };
 
   return (
-    <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
+    <div className="mobile-pad" style={{ maxWidth: '1200px', margin: '0 auto', padding: '2rem' }}>
       <div style={{ marginBottom: '1.5rem' }}>
         <h2 style={{ fontSize: '20px', fontWeight: 600, color: 'var(--steel)' }}>Dashboard Overview</h2>
         <p style={{ fontSize: '13.5px', color: 'var(--text-3)', marginTop: '3px' }}>
@@ -71,7 +71,7 @@ export default function Dashboard() {
       </div>
 
       {/* Stat Cards */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: '1rem', marginBottom: '1.5rem' }}>
+      <div className="grid-4" style={{ marginBottom: '1.5rem' }}>
         <StatCard label="Total Inquiries" value={data.total_inquiries} sub="All time" />
         <StatCard label="Quotations Sent" value={data.total_quoted}    sub="Quoted stage"    accent="amber" />
         <StatCard label="Approved Orders" value={data.total_approved}  sub="Converted"       accent="green" />
@@ -79,7 +79,7 @@ export default function Dashboard() {
       </div>
 
       {/* Charts Row */}
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+      <div className="grid-2" style={{ marginBottom: '1rem' }}>
         <Card>
           <div style={{ fontSize: '15px', fontWeight: 600, marginBottom: '1.25rem' }}>Status Breakdown</div>
           <BarChart byStatus={data.by_status || {}} />
